@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Ajmeer Khaja Educational Complex - Leading academic and charitable organization.">
+    <meta name="keywords" content="AKEC, Ajmeer Khaja, Desamangalam, Educational Complex, Islamic Studies">
+    <meta name="author" content="Ajmeer Khaja Educational Complex">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+
+    <style>
+        :root {
+            --deep-blue: #0c629e;
+            --soft-gold: #c5a059;
+            --ice-white: #ffffff;
+            --text-gray: #555555;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-gray); }
+
+        /* Header Area */
+        .top-header { background-color: var(--deep-blue); color: white; padding: 10px 0; font-size: 14px; }
+        .top-header a { color: white; text-decoration: none; margin-right: 15px; }
+        
+        .navbar-brand img { height: 70px; width: auto; }
+        .nav-link { color: var(--deep-blue) !important; font-weight: 600; margin: 0 10px; }
+        .default-btn {
+            background-color: var(--deep-blue);
+            color: white !important;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .default-btn:hover { background-color: var(--soft-gold); }
+
+        /* Page Title Area */
+        .page-title-area {
+            background: linear-gradient(rgba(12, 98, 158, 0.8), rgba(12, 98, 158, 0.8)), url('assets/images/gallery1.jpeg');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+        .page-title-content h2 { font-size: 45px; font-weight: 800; text-transform: uppercase; }
+        .page-title-content ul { list-style: none; padding: 0; display: flex; justify-content: center; gap: 10px; }
+        .page-title-content ul li a { color: var(--soft-gold); text-decoration: none; font-weight: 600; }
+
+        /* Contact Info Area */
+        .contact-info-area { padding: 100px 0; }
+        .contact-info h2 { color: var(--deep-blue); font-weight: 800; margin-bottom: 30px; }
+        .address { list-style: none; padding: 0; }
+        .address li { position: relative; padding-left: 50px; margin-bottom: 25px; line-height: 1.6; }
+        .address li i { 
+            position: absolute; left: 0; top: 0; 
+            font-size: 30px; color: var(--soft-gold); 
+        }
+        .address li span { display: block; font-weight: 700; color: var(--deep-blue); text-transform: uppercase; font-size: 14px; }
+        .address li a { color: inherit; text-decoration: none; transition: 0.3s; }
+        .address li a:hover { color: var(--soft-gold); }
+
+        /* Social Links */
+        .social-link { list-style: none; padding: 0; display: flex; gap: 15px; margin-top: 30px; }
+        .social-link li a {
+            width: 45px; height: 45px; background: var(--deep-blue);
+            color: white; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; font-size: 20px; transition: 0.3s;
+        }
+        .social-link li a:hover { background: var(--soft-gold); transform: translateY(-5px); }
+
+        /* Map Fix */
+        .map-area iframe { border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; height: 450px; border: 0; }
+
+        /* Footer */
+        .footer-area { background-color: #ffffff; padding: 80px 0 50px; border-top: 5px solid var(--soft-gold); color: #444; }
+        .single-footer-widget h3 { color: var(--deep-blue); font-size: 20px; font-weight: 700; margin-bottom: 25px; text-transform: uppercase; }
+        .import-link { list-style: none; padding: 0; }
+        .import-link li { margin-bottom: 12px; }
+        .import-link li a { color: #444; text-decoration: none; transition: 0.3s; }
+        .import-link li a:hover { color: var(--soft-gold); padding-left: 5px; }
+        .copy-right-area { background-color: #f8f9fa; padding: 20px 0; border-top: 1px solid #eee; text-align: center; color: var(--deep-blue); }
+
+         @media (min-width: 992px) {
+            .navbar-nav .nav-item.dropdown:hover > .dropdown-menu {
+                display: block;
+                margin-top: 0;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        }
+        .navbar-nav .dropdown-menu {
+            display: block;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease-in-out;
+            border: none;
+            border-top: 3px solid var(--soft-gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-radius: 0 0 10px 10px;
+            min-width: 280px;
+            padding: 10px 0;
+        }
+        .navbar-nav .dropdown-item {
+            color: var(--deep-blue);
+            font-weight: 500;
+            padding: 10px 20px;
+            transition: 0.2s;
+            white-space: normal;
+        }
+        .navbar-nav .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: var(--soft-gold);
+            padding-left: 25px;
+        }
+    </style>
+    
+    <title>Contact Us - Ajmeer Khaja Educational Complex</title>
+</head>
+<body>
+
+    <header class="header-area">
+        <div class="top-header">
+            <div class="container d-flex justify-content-between">
+                <div class="header-left">
+                    <a href="tel:+919605977090"><i class="ri-phone-fill"></i> +91 96 05 977090</a>
+                    <a href="mailto:office.ajmeerkhajaeducationalcomplex@gmail.com"><i class="ri-mail-fill"></i> office.ajmeerkhajaeducationalcomplex@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="logo.webp" alt="AKEC Logo">
+                </a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                         <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="academics.html" id="academicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Academics
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="academicsDropdown">
+                            <li><a class="dropdown-item" href="dawa.html">Zanchari Excellence Centre For Da'wa</a></li>
+                            <li><a class="dropdown-item" href="hifz.html">Khaja Mueenudheen Hifzul Qur'an Academy</a></li>
+                            <li><a class="dropdown-item" href="madrassa.html">Ajmeer Khaja Residential Madrassa</a></li>
+                            <li><a class="dropdown-item" href="garden.html">Mueeniyya Garden Of Qur'an Studies For Girls</a></li>
+                        </ul>
+                    </li>
+                        <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+                    </ul>
+                    <a href="#" class="default-btn">Donate Now</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-title-area">
+        <div class="container">
+            <div class="page-title-content">
+                <h2>Contact Us</h2>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li style="color: white;">/ Contact</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <section class="contact-info-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="map-area">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.000000000000!2d76.223000!3d10.745000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7dcd667e69d7b%3A0x60098f99767c8752!2sDesamangalam%2C%20Thrissur%2C%20Kerala!5e0!3m2!1sen!2sin!4v1710000000000" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="contact-info">
+                        <h2>Get in touch</h2>
+                        <ul class="address">
+                            <li>
+                                <i class="ri-map-pin-2-fill"></i>
+                                <span>Address</span>
+                                AJMEER KHAJA EDUCATIONAL COMPLEX<br>
+                                DESAMANGALAM, THRISSUR<br>
+                                KERALA, INDIA
+                            </li>
+                            <li>
+                                <i class="ri-mail-line"></i>
+                                <span>Email</span>
+                                <a href="mailto:office.ajmeerkhajaeducationalcomplex@gmail.com">office.ajmeerkhajaeducationalcomplex@gmail.com</a>
+                            </li>
+                            <li>
+                                <i class="ri-phone-fill"></i>
+                                <span>Phone</span>
+                                <a href="tel:+919605977090">+91 9605 977090</a><br>
+                                <a href="tel:+919656475770">+91 9656 475770</a>
+                            </li>
+                        </ul>
+
+                        <h3>Follow Us</h3>
+                        <ul class="social-link">
+                            <li><a href="#" target="_blank"><i class="ri-facebook-fill"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="ri-instagram-fill"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="ri-youtube-fill"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="ri-whatsapp-fill"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single-footer-widget">
+                        <img src="logo.webp" alt="Logo" style="max-height: 80px; margin-bottom: 20px;">
+                        <p>Ajmeer Khaja Educational Complex is a leading academic and charitable organization committed to holistic social development and spiritual excellence.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h3>Quick Links</h3>
+                        <ul class="import-link">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="#">About AKEC</a></li>
+                            <li><a href="#">Admission</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h3>Direct Contact</h3>
+                        <ul class="address" style="font-size: 14px;">
+                            <li><i class="ri-map-pin-line"></i> Desamangalam, Thrissur, Kerala</li>
+                            <li><i class="ri-mail-line"></i> office.ajmeerkhajaeducationalcomplex@gmail.com</li>
+                            <li><i class="ri-phone-line"></i> +91 9605 977090</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer >
+
+    <div class="copy-right-area">
+        <div class="container">
+            <p>Copyright © 2026 <strong>Ajmeer Khaja Educational Complex</strong>. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
