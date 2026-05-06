@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Ajmeer Khaja Residential Madrassa - Holistic Moral and Academic Education">
+    <title>Residential Madrassa - AKEC</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+
+    <style>
+        :root {
+            --deep-blue: #0c629e;
+            --soft-gold: #c5a059;
+            --ice-white: #ffffff;
+            --soft-shadow: rgba(12, 98, 158, 0.1);
+            --text-gray: #555555;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-gray); line-height: 1.6; }
+        
+        /* Header & Navbar Inherited Styles */
+        .top-header { background-color: var(--deep-blue); color: white; padding: 10px 0; font-size: 14px; }
+        .top-header a { color: white; text-decoration: none; margin-right: 15px; }
+        .navbar-brand img { height: 70px; width: auto; }
+        .nav-link { color: var(--deep-blue) !important; font-weight: 600; margin: 0 10px; }
+        
+        /* Breadcrumb Area */
+        .page-title-area {
+            background: linear-gradient(rgba(12, 98, 158, 0.9), rgba(12, 98, 158, 0.9)), url('gallery3.webp');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 0;
+            color: white;
+            text-align: center;
+        }
+
+        /* --- SURGICAL ADDITIVE STYLES --- */
+        .madrassa-admission-holder {
+            border: 2px dashed var(--soft-gold);
+            border-radius: 15px;
+            padding: 10px;
+            background: #fdfaf4;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .madrassa-admission-holder img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .madrassa-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px var(--soft-shadow);
+            border-bottom: 5px solid var(--deep-blue);
+            height: 100%;
+        }
+
+        .madrassa-feature-icon {
+            font-size: 32px;
+            color: var(--soft-gold);
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        /* Dropdown Hover Logic */
+        @media (min-width: 992px) {
+            .nav-item.dropdown:hover .dropdown-menu { display: block; margin-top: 0; }
+        }
+         /* ADDITIVE DROPDOWN STYLES (High Specificity) */
+        @media (min-width: 992px) {
+            .navbar-nav .nav-item.dropdown:hover > .dropdown-menu {
+                display: block;
+                margin-top: 0;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        }
+        .navbar-nav .dropdown-menu {
+            display: block;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease-in-out;
+            border: none;
+            border-top: 3px solid var(--soft-gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-radius: 0 0 10px 10px;
+            min-width: 280px;
+            padding: 10px 0;
+        }
+        .navbar-nav .dropdown-item {
+            color: var(--deep-blue);
+            font-weight: 500;
+            padding: 10px 20px;
+            transition: 0.2s;
+            white-space: normal;
+        }
+        .navbar-nav .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: var(--soft-gold);
+            padding-left: 25px;
+        }
+
+        img { opacity: 1 !important; visibility: visible !important; }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <div class="container d-flex justify-content-between">
+            <div>
+                <a href="tel:+919605977090"><i class="ri-phone-fill"></i> +91 96 05 977090</a>
+                <a href="mailto:office.ajmeerkhajaeducationalcomplex@gmail.com"><i class="ri-mail-fill"></i> office.ajmeerkhajaeducationalcomplex@gmail.com</a>
+            </div>
+            <div class="d-none d-md-block">
+                <a href="#">Career</a> | <a href="#">Admission</a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.png" alt="AKEC Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="academics.html" id="academicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Academics
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="academicsDropdown">
+                            <li><a class="dropdown-item" href="dawa.html">Zanchari Excellence Centre For Da'wa</a></li>
+                            <li><a class="dropdown-item" href="hifz.html">Khaja Mueenudheen Hifzul Qur'an Academy</a></li>
+                            <li><a class="dropdown-item" href="madrassa.html">Ajmeer Khaja Residential Madrassa</a></li>
+                            <li><a class="dropdown-item" href="garden.html">Mueeniyya Garden Of Qur'an Studies For Girls</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="activities.html">Activities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <a href="#" class="default-btn" style="background-color: var(--deep-blue); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Donate Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-title-area">
+        <div class="container">
+            <h2>Ajmeer Khaja Residential Madrassa</h2>
+            <p>Nurturing Character through Primary Moral Education</p>
+        </div>
+    </div>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="madrassa-admission-holder">
+                        <img src="admission-madrassa.jpg" alt="Madrassa Admission Open" onerror="this.src='https://via.placeholder.com/800x400?text=ADMISSION+OPEN+IMAGE+RESIDENTIAL+MADRASSA'">
+                    </div>
+
+                    <div class="mb-5">
+                        <h3 style="color: var(--deep-blue); font-weight: 800;">Mission & Vision</h3>
+                        <p style="text-align: justify; font-size: 1.1rem;">
+                            This is a comprehensive residential education system designed for upper primary students with the mission of making Madrassa studies more practical. Through scientific and systematic guidance from a young age, students are deeply grounded in moral values, and a stress-free, safe, and enthusiastic learning environment is provided. The main objective is to develop moral values and social awareness along with knowledge, and to shape exemplary personalities for future society.
+                        </p>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="madrassa-card text-center">
+                                <i class="ri-heart-line madrassa-feature-icon"></i>
+                                <h4>Moral Grounding</h4>
+                                <p>Scientific guidance focused on embedding core values in young minds during their formative years.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="madrassa-card text-center">
+                                <i class="ri-leaf-line madrassa-feature-icon"></i>
+                                <h4>Stress-Free Learning</h4>
+                                <p>A safe and enthusiastic environment where students learn naturally without academic pressure.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="p-4 rounded-4 shadow-sm" style="background: var(--deep-blue); color: white;">
+                        <h4>Program Overview</h4>
+                        <hr style="border-color: rgba(255,255,255,0.2);">
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="ri-check-double-line"></i> <strong>Target:</strong> Upper Primary Students</li>
+                            <li class="mb-3"><i class="ri-check-double-line"></i> <strong>Mode:</strong> Full Residential</li>
+                            <li class="mb-3"><i class="ri-check-double-line"></i> <strong>Curriculum:</strong> Practical Madrassa Studies</li>
+                            <li class="mb-3"><i class="ri-check-double-line"></i> <strong>Focus:</strong> Social Awareness & Personality</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn-outline-light w-100 mt-2">Request Admission Info</a>
+                    </div>
+                    
+                    <div class="mt-4 p-4 rounded-4" style="background: #f8f9fa; border: 1px solid #eee;">
+                        <h5 style="color: var(--deep-blue);">Safety First</h5>
+                        <p class="small text-muted">We provide 24/7 supervision and a homely atmosphere for all our residential students to ensure they feel secure and motivated.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: #1a1a1a; color: #ccc; padding: 60px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h3 style="color: white;">About AKEC</h3>
+                    <p>Ajmeer Khaja Educational Complex is a leading academic and charitable organization committed to holistic social development.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h3 style="color: white;">Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" style="color: #ccc; text-decoration: none;">Home</a></li>
+                        <li><a href="about.html" style="color: #ccc; text-decoration: none;">About Us</a></li>
+                        <li><a href="dawa.html" style="color: #ccc; text-decoration: none;">Da'wa Centre</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Contact Us</h3>
+                    <p><i class="ri-map-pin-line"></i> Desamangalam, Thrissur</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
