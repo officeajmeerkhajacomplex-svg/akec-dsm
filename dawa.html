@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Zanchari Excellence Centre For Da'wa - Ajmeer Khaja Educational Complex">
+    <title>Da'wa Institution - AKEC</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+
+    <style>
+        :root {
+            --deep-blue: #0c629e;
+            --soft-gold: #c5a059;
+            --ice-white: #ffffff;
+            --soft-shadow: rgba(12, 98, 158, 0.1);
+            --text-gray: #555555;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-gray); line-height: 1.6; }
+        
+        /* Header & Navbar */
+        .top-header { background-color: var(--deep-blue); color: white; padding: 10px 0; font-size: 14px; }
+        .top-header a { color: white; text-decoration: none; margin-right: 15px; }
+        .navbar-brand img { height: 70px; width: auto; }
+        .nav-link { color: var(--deep-blue) !important; font-weight: 600; margin: 0 10px; }
+        
+        /* Breadcrumb Area */
+        .page-title-area {
+            background: linear-gradient(rgba(12, 98, 158, 0.9), rgba(12, 98, 158, 0.9)), url('gallery1.webp');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 0;
+            color: white;
+            text-align: center;
+        }
+
+        /* --- SURGICAL ADDITIVE STYLES --- */
+        .dawa-admission-holder {
+            border: 2px dashed var(--soft-gold);
+            border-radius: 15px;
+            padding: 10px;
+            background: #fff9f0;
+            margin-bottom: 40px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .dawa-admission-holder img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--soft-shadow);
+            border-left: 5px solid var(--deep-blue);
+            height: 100%;
+        }
+
+        .program-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+        .program-table td {
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        .program-table td:first-child {
+            font-weight: 700;
+            color: var(--deep-blue);
+            width: 40%;
+            border-radius: 10px 0 0 10px;
+        }
+        .program-table td:last-child {
+            border-radius: 0 10px 10px 0;
+        }
+
+        .badge-dawa {
+            background-color: var(--soft-gold);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        /* Hover Dropdown Logic */
+        @media (min-width: 992px) {
+            .nav-item.dropdown:hover .dropdown-menu { display: block; margin-top: 0; }
+        }
+        /* ADDITIVE DROPDOWN STYLES (High Specificity) */
+        @media (min-width: 992px) {
+            .navbar-nav .nav-item.dropdown:hover > .dropdown-menu {
+                display: block;
+                margin-top: 0;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        }
+        .navbar-nav .dropdown-menu {
+            display: block;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease-in-out;
+            border: none;
+            border-top: 3px solid var(--soft-gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-radius: 0 0 10px 10px;
+            min-width: 280px;
+            padding: 10px 0;
+        }
+        .navbar-nav .dropdown-item {
+            color: var(--deep-blue);
+            font-weight: 500;
+            padding: 10px 20px;
+            transition: 0.2s;
+            white-space: normal;
+        }
+        .navbar-nav .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: var(--soft-gold);
+            padding-left: 25px;
+        }
+
+        /* Ensure images load instantly */
+        img { opacity: 1 !important; visibility: visible !important; }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <div class="container d-flex justify-content-between">
+            <div>
+                <a href="tel:+919605977090"><i class="ri-phone-fill"></i> +91 96 05 977090</a>
+                <a href="mailto:office.ajmeerkhajaeducationalcomplex@gmail.com"><i class="ri-mail-fill"></i> office.ajmeerkhajaeducationalcomplex@gmail.com</a>
+            </div>
+            <div class="d-none d-md-block">
+                <a href="#">Career</a> | <a href="#">Admission</a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.webp" alt="AKEC Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="academics.html" id="academicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Academics
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="academicsDropdown">
+                            <li><a class="dropdown-item" href="dawa.html">Zanchari Excellence Centre For Da'wa</a></li>
+                            <li><a class="dropdown-item" href="hifz.html">Khaja Mueenudheen Hifzul Qur'an Academy</a></li>
+                            <li><a class="dropdown-item" href="madrassa.html">Ajmeer Khaja Residential Madrassa</a></li>
+                            <li><a class="dropdown-item" href="garden.html">Mueeniyya Garden Of Qur'an Studies For Girls</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <a href="#" class="default-btn" style="background-color: var(--deep-blue); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Donate Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-title-area">
+        <div class="container">
+            <h2>Zanchari Excellence Centre For Da'wa</h2>
+            <p>Affiliated with Jami'atul Hind Al Islamiyya</p>
+        </div>
+    </div>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="dawa-admission-holder">
+                        <img src="admission-dawa.jpg" alt="Admission Open 2026" onerror="this.src='https://via.placeholder.com/800x400?text=ADMISSION+OPEN+IMAGE+HOLDER'">
+                    </div>
+
+                    <div class="mb-5">
+                        <h3 style="color: var(--deep-blue); font-weight: 800;">About the Institution</h3>
+                        <p style="text-align: justify;">
+                            This system, designed with the aim of not deviating from the moral life in the chaotic flow of society and to form an excellent religious teaching cadre, is affiliated with Jami'atul Hind Al Islamiyya under Samastha Kerala Jam-iyyathul Ulama. Along with Islamic education, it provides free education in Islamic Jurisprudence, Arabic Grammar, Language Studies, and Computer Studies such as Digital Design, Accounting, and Web Design, up to postgraduate degrees. Students have been studying in courses such as PG, Engineering, Chartered Accounting, Airport Management, and Logistics. Al Mueini graduates who have graduated from the institutions work in various parts of the country in the fields of teaching and service.
+                        </p>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="info-card">
+                                <span class="badge-dawa">Junior Da'wah</span>
+                                <table class="program-table">
+                                    <tr>
+                                        <td>Syllabus</td>
+                                        <td>HSISC 3 Year Syllabus</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Eligibility</td>
+                                        <td>7th Std Pass</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Admission</td>
+                                        <td>J-SAT Entrance Examination</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Channel</td>
+                                        <td>Single Window</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="info-card">
+                                <span class="badge-dawa">Senior Da'wah</span>
+                                <table class="program-table">
+                                    <tr>
+                                        <td>Syllabus</td>
+                                        <td>HSISC 2 Year Syllabus</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Eligibility</td>
+                                        <td>10th Std Pass</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Admission</td>
+                                        <td>J-SAT Entrance Examination</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Channel</td>
+                                        <td>Single Window</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="p-4 rounded-4" style="background: var(--deep-blue); color: white;">
+                        <h4>Quick Contact</h4>
+                        <hr>
+                        <p><i class="ri-phone-line"></i> +91 9605 977090</p>
+                        <p><i class="ri-mail-line"></i> office.akec@gmail.com</p>
+                        <a href="contact.html" class="btn btn-light w-100 mt-3" style="color: var(--deep-blue); font-weight: 700;">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: #1a1a1a; color: #ccc; padding: 60px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h3 style="color: white;">About AKEC</h3>
+                    <p>Leading academic and charitable organization committed to holistic social development.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h3 style="color: white;">Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" style="color: #ccc; text-decoration: none;">Home</a></li>
+                        <li><a href="about.html" style="color: #ccc; text-decoration: none;">About Us</a></li>
+                        <li><a href="contact.html" style="color: #ccc; text-decoration: none;">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h3 style="color: white;">Location</h3>
+                    <p>Desamangalam, Thrissur, Kerala</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
