@@ -176,7 +176,7 @@
         <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="contact-info">
                 <a href="tel:+919605977090"><i class="ri-phone-fill"></i> +91 96 05 977090</a>
-                <a href="mailto:office.ajmeerkhajaeducationalcomplex@gmail.com"><i class="ri-mail-fill"></i> office.ajmeerkhajaeducationalcomplex@gmail.com</a>
+                <a href="mailto:office.ajmeerkhajacomplex@gmail.com"><i class="ri-mail-fill"></i> office.ajmeerkhajacomplex@gmail.com</a>
             </div>
             <div class="social-links mt-2 mt-md-0">
                 <a href="#"><i class="ri-facebook-fill"></i></a>
@@ -325,7 +325,7 @@
                     <h3>Contact Us</h3>
                     <p><i class="ri-map-pin-line text-gold"></i> Desamangalam, Thrissur, Kerala</p>
                     <p><i class="ri-phone-line text-gold"></i> +91 9605 977090, +91 9656 475770</p>
-                    <p><i class="ri-mail-line text-gold"></i> office.ajmeerkhajaeducationalcomplex@gmail.com</p>
+                    <p><i class="ri-mail-line text-gold"></i> office.ajmeerkhajacomplex@gmail.com</p>
                 </div>
             </div>
             <hr class="mt-5" style="border-color: #333;">
@@ -337,43 +337,33 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- WHATSAPP INTEGRATION & PDF LOGIC -->
+    <!-- FORM SUBMISSION & PDF LOGIC -->
     <script>
         document.getElementById('admissionForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Collect Form Data
-            const name = document.getElementById('name').value;
-            const institution = document.getElementById('institution').value;
-            const dob = document.getElementById('dob').value;
-            const pob = document.getElementById('pob').value;
-            const gender = document.getElementById('gender').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value || 'N/A';
-            const address = document.getElementById('address').value;
-
-            // Logic Locking: WhatsApp formatting remains unchanged
-            const message = `*AKEC ADMISSION APPLICATION*%0A` +
-                            `------------------------------%0A` +
-                            `*Student Name:* ${name}%0A` +
-                            `*Institution:* ${institution}%0A` +
-                            `*Date of Birth:* ${dob}%0A` +
-                            `*Place of Birth:* ${pob}%0A` +
-                            `*Gender:* ${gender}%0A` +
-                            `*Phone:* ${phone}%0A` +
-                            `*Email:* ${email}%0A` +
-                            `*Address:* ${address}%0A` +
-                            `------------------------------%0A` +
-                            `_Submitted via Admission Portal_`;
-
-            const whatsappUrl = `https://wa.me/919605977090?text=${message}`;
-            window.open(whatsappUrl, '_blank');
-
-            // Show PDF download modal
             document.getElementById('akecSuccessPopup').style.display = 'flex';
         });
 
-        document.getElementById('downloadPdfFinal').addEventListener('click', function() {
+        // Helper function to convert image URL to base64 for PDF
+        const getBase64ImageFromURL = (url) => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.setAttribute("crossOrigin", "anonymous");
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0);
+                    const dataURL = canvas.toDataURL("image/png");
+                    resolve(dataURL);
+                };
+                img.onerror = (error) => reject(error);
+                img.src = url;
+            });
+        };
+
+        document.getElementById('downloadPdfFinal').addEventListener('click', async function() {
             const btn = this;
             const originalText = btn.innerHTML;
             btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Generating...';
@@ -405,19 +395,28 @@
                 const rm = 15;
                 const cw = pageW - lm - rm;
 
-                // HEADER
+                // HEADER BACKGROUND
                 doc.setFillColor(...BLUE);
                 doc.rect(0, 0, pageW, 40, 'F');
 
+                // LOGO INTEGRATION
+                try {
+                    const logoUrl = "https://github.com/officeajmeerkhajacomplex-svg/akec-dsm/blob/main/logo.png?raw=true";
+                    const imgData = await getBase64ImageFromURL(logoUrl);
+                    doc.addImage(imgData, 'PNG', 12, 8, 24, 24); // Positioning logo on the left
+                } catch (logoErr) {
+                    console.warn('Logo could not be loaded into PDF', logoErr);
+                }
+
                 doc.setTextColor(255, 255, 255);
                 doc.setFont('helvetica', 'bold');
-                doc.setFontSize(22);
-                doc.text('AJMEER KHAJA EDUCATIONAL COMPLEX', pageW / 2, 18, { align: 'center' });
+                doc.setFontSize(20);
+                doc.text('AJMEER KHAJA EDUCATIONAL COMPLEX', pageW / 2 + 10, 18, { align: 'center' });
                 
                 doc.setFontSize(10);
                 doc.setFont('helvetica', 'normal');
-                doc.text('Desamangalam, Thrissur, Kerala - 679532', pageW / 2, 25, { align: 'center' });
-                doc.text('Email: office.ajmeerkhajaeducationalcomplex@gmail.com | Mob: +91 9605977090', pageW / 2, 30, { align: 'center' });
+                doc.text('Desamangalam, Thrissur, Kerala - 679532', pageW / 2 + 10, 25, { align: 'center' });
+                doc.text('Email: office.ajmeerkhajacomplex@gmail.com | Mob: +91 9605977090', pageW / 2 + 10, 30, { align: 'center' });
 
                 // SUBTITLE
                 doc.setFillColor(...GOLD);
