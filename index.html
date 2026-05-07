@@ -142,12 +142,41 @@
             object-fit: cover; 
             display: block;
         }
+
+        /* --- AKEC MOBILE RESPONSIVENESS OVERRIDES --- */
+        @media (max-width: 767px) {
+            .custom-banner { padding: 40px 0; }
+            .banner-content h1 { font-size: 32px; text-align: center; }
+            .banner-content p { text-align: center; font-size: 15px; }
+            .banner-content { text-align: center; margin-bottom: 30px; }
+            .akec-hero-img-holder { height: 280px; border-radius: 20px 40px 20px 20px; }
+            
+            .akec-additive-wrap { padding: 40px 0; }
+            .akec-secretary-card { padding: 25px; margin-top: -20px; position: relative; z-index: 2; text-align: center; }
+            .akec-secretary-img { margin-bottom: 0; }
+            .akec-secretary-name { font-size: 20px; }
+            
+            .section-header h2 { font-size: 28px; margin-bottom: 30px; }
+            .program-content { padding: 20px; text-align: center; }
+            .program-content h3 { font-size: 17px; min-height: auto; margin-bottom: 10px; }
+            
+            .akec-gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 20px 15px; }
+            .akec-gallery-item { height: 160px; }
+
+            .top-header { text-align: center; }
+            .top-header a { display: block; margin-right: 0; margin-bottom: 5px; }
+            
+            .navbar-brand img { height: 55px; }
+            
+            footer { text-align: center; padding: 40px 0; }
+            footer h3 { font-size: 20px; margin-top: 20px; }
+        }
     </style>
 </head>
 <body>
 
     <div class="top-header">
-        <div class="container d-flex justify-content-between">
+        <div class="container d-flex flex-column flex-md-row justify-content-between">
             <div>
                 <a href="tel:+919605977090"><i class="ri-phone-fill"></i> +91 96 05 977090</a>
                 <a href="mailto:office.ajmeerkhajacomplex@gmail.com"><i class="ri-mail-fill"></i> office.ajmeerkhajacomplex</a>
@@ -163,11 +192,11 @@
             <a class="navbar-brand" href="index.html">
                 <img src="logo.webp" alt="AKEC Logo">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="ri-menu-line" style="font-size: 24px; color: var(--deep-blue);"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav m-auto">
+                <ul class="navbar-nav m-auto text-center">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                     
@@ -175,7 +204,7 @@
                         <a class="nav-link dropdown-toggle" href="academics.html" id="academicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Academics
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="academicsDropdown">
+                        <ul class="dropdown-menu border-0 text-center text-lg-start" aria-labelledby="academicsDropdown">
                             <li><a class="dropdown-item" href="dawa.html">Zanchari Excellence Centre For Da'wa</a></li>
                             <li><a class="dropdown-item" href="hifz.html">Khaja Mueenudheen Hifzul Qur'an Academy</a></li>
                             <li><a class="dropdown-item" href="madrassa.html">Ajmeer Khaja Residential Madrassa</a></li>
@@ -185,7 +214,9 @@
 
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 </ul>
-                <a href="#" class="default-btn">Donate Now</a>
+                <div class="text-center pb-3 pb-lg-0">
+                    <a href="#" class="default-btn w-100 w-lg-auto">Donate Now</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -220,7 +251,7 @@
                     <div class="akec-secretary-card">
                         <span class="akec-secretary-pos">General Secretary</span>
                         <h2 class="akec-secretary-name">Muhammed Ilyas Ahsani, Desamangalam</h2>
-                        <hr style="width: 50px; border: 2px solid var(--soft-gold); opacity: 1; margin: 20px 0;">
+                        <hr class="mx-auto mx-lg-0" style="width: 50px; border: 2px solid var(--soft-gold); opacity: 1; margin: 20px 0;">
                         <p style="font-style: italic; font-size: 18px; line-height: 1.8;">"Our vision at Ajmeer Khaja Educational Complex is to empower students with both academic brilliance and moral integrity. We strive to create a generation that is not only professionally capable but socially responsible."</p>
                     </div>
                 </div>
