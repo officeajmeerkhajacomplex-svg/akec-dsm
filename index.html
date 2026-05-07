@@ -170,6 +170,19 @@
             
             footer { text-align: center; padding: 40px 0; }
             footer h3 { font-size: 20px; margin-top: 20px; }
+
+            /* SURGICAL FIX: Remove spacing between Academics and Contact in mobile menu */
+            .navbar-nav .dropdown-menu { 
+                margin-bottom: 0 !important; 
+                padding-bottom: 0 !important;
+                position: relative !important; 
+                opacity: 1 !important; 
+                visibility: visible !important; 
+                transform: none !important;
+                box-shadow: none !important;
+                border-top: none !important;
+            }
+            .navbar-nav .nav-item.dropdown { margin-bottom: 0 !important; }
         }
     </style>
 </head>
@@ -229,7 +242,7 @@
                         <span class="banner-tag">Welcome to AKEC</span>
                         <h1>Ajmeer Khaja Educational Complex: Decades of Excellence</h1>
                         <p>Dedicated to education, philanthropy, and social welfare for the upliftment of the marginalized.</p>
-                        <a href="admission.html" class="default-btn">Admission Portal</a>
+                        <a href="#" class="default-btn">Explore Our Journey</a>
                     </div>
                 </div>
                 <div class="col-lg-6 text-center">
