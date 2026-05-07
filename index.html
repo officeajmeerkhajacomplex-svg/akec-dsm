@@ -184,6 +184,32 @@
             }
             .navbar-nav .nav-item.dropdown { margin-bottom: 0 !important; }
         }
+
+        /* --- AKEC NEW FEATURE: ABOUT & MEDIA PLAYER --- */
+        .akec-info-media-section { padding: 80px 0; background: #fff; }
+        .akec-info-text { font-size: 17px; line-height: 1.8; color: #444; }
+        .akec-media-player-container {
+            width: 320px;
+            height: 570px;
+            background: #000;
+            border-radius: 35px;
+            border: 8px solid #222;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            margin: 0 auto;
+            position: relative;
+        }
+        /* UPDATED: Native Video Styles (Interface Removal) */
+        .akec-media-player-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 991px) {
+            .akec-info-media-section { padding: 40px 0; text-align: center; }
+            .akec-info-text { margin-bottom: 30px; }
+            .akec-media-player-container { width: 280px; height: 500px; }
+        }
     </style>
 </head>
 <body>
@@ -266,6 +292,29 @@
                         <h2 class="akec-secretary-name">Muhammed Ilyas Ahsani, Desamangalam</h2>
                         <hr class="mx-auto mx-lg-0" style="width: 50px; border: 2px solid var(--soft-gold); opacity: 1; margin: 20px 0;">
                         <p style="font-style: italic; font-size: 18px; line-height: 1.8;">"Our vision at Ajmeer Khaja Educational Complex is to empower students with both academic brilliance and moral integrity. We strive to create a generation that is not only professionally capable but socially responsible."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="akec-info-media-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="akec-info-text">
+                        <span class="banner-tag">Overview</span>
+                        <h2 style="color: var(--deep-blue); font-weight: 800; margin: 15px 0 25px;">Rooted in Tradition, Building the Future</h2>
+                        <p>The Ajmeer Khaja Educational Complex (AKEC) stands as a beacon of hope and a center of transformative learning in Desamangalam. For decades, our institution has been deeply committed to bridging the gap between traditional spiritual values and modern academic requirements. We believe that true education goes beyond textbooks; it involves the cultivation of a compassionate heart and a critical mind. Our sprawling campus provides a sanctuary for students from various backgrounds to pursue excellence in Hifz, Da'wa, and formal secular studies, ensuring they emerge as well-rounded leaders of tomorrow.</p>
+                        <p>Beyond the classroom, AKEC is a pillar of humanitarian strength. We actively engage in numerous social welfare projects, including educational aid for the marginalized, healthcare support initiatives, and community development programs. Our mission is to foster an environment where every individual has the opportunity to realize their full potential, regardless of their financial circumstances. By integrating rigorous academic standards with a strong emphasis on moral and ethical conduct, we are not just teaching students—we are building a resilient and enlightened community dedicated to the service of humanity.</p>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="akec-media-player-container">
+                        <video controls autoplay muted loop playsinline>
+                            <source src="nasim.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
             </div>
