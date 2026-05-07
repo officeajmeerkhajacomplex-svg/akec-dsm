@@ -122,6 +122,25 @@
             color: var(--soft-gold);
             padding-left: 25px;
         }
+
+        /* AKEC ADD-ON: Hero Image Fit Improvement */
+        .akec-hero-img-holder {
+            background: #ddd;
+            height: 350px;
+            border-radius: 30px 80px 30px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+        .Institution-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -133,7 +152,7 @@
                 <a href="mailto:office.ajmeerkhajacomplex@gmail.com"><i class="ri-mail-fill"></i> office.ajmeerkhajacomplex</a>
             </div>
             <div class="d-none d-md-block">
-                <a href="#">Career</a> | <a href="#">Admission</a>
+                <a href="#">Career</a> | <a href="admission.html">Admission</a>
             </div>
         </div>
     </div>
@@ -182,10 +201,8 @@
                     </div>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <div style="background: #ddd; height: 350px; border-radius: 30px 80px 30px 30px;">
-                        <div class="pt-5 mt-5">
-                             <img src="institution.png" alt="Institution Image" class="Institution-image" loading="eager">
-                        </div>
+                    <div class="akec-hero-img-holder">
+                        <img src="institution.png" alt="Institution Image" class="Institution-image" loading="eager">
                     </div>
                 </div>
             </div>
