@@ -25,13 +25,14 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #555; background-color: #f8fafc; }
         
         /* Header & Navbar */
-        .top-header { background-color: var(--deep-blue); color: white; padding: 10px 0; font-size: 14px; }
+        .top-header { background-color: var(--deep-blue); color: white; padding: 8px 0; font-size: 13px; }
         .top-header a { color: white; text-decoration: none; margin-right: 15px; transition: 0.3s; }
         .top-header a:hover { color: var(--soft-gold); }
         
-        .navbar { box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 15px 0; }
-        .navbar-brand img { max-width: 180px; height: auto; }
-        .nav-link { color: var(--deep-blue) !important; font-weight: 600; margin: 0 10px; transition: 0.3s; }
+        /* NAVBAR SLIMMING MODIFICATION */
+        .navbar { box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 2px 0; }
+        .navbar-brand img { max-width: 120px; height: auto; }
+        .nav-link { color: var(--deep-blue) !important; font-weight: 600; margin: 0 8px; font-size: 0.95rem; transition: 0.3s; }
         .nav-link:hover, .nav-link.active { color: var(--soft-gold) !important; }
 
         /* Admission Specific Styles */
@@ -351,7 +352,7 @@
             const email = document.getElementById('email').value || 'N/A';
             const address = document.getElementById('address').value;
 
-            // PRESERVED LOGIC: Message formatting remains unchanged as per Protocol
+            // Logic Locking: WhatsApp formatting remains unchanged
             const message = `*AKEC ADMISSION APPLICATION*%0A` +
                             `------------------------------%0A` +
                             `*Student Name:* ${name}%0A` +
@@ -365,7 +366,10 @@
                             `------------------------------%0A` +
                             `_Submitted via Admission Portal_`;
 
-            // MODIFICATION: WhatsApp Redirect removed as requested. Direct to Modal.
+            const whatsappUrl = `https://wa.me/919605977090?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+
+            // Show PDF download modal
             document.getElementById('akecSuccessPopup').style.display = 'flex';
         });
 
@@ -375,213 +379,125 @@
             btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Generating...';
             btn.disabled = true;
 
+            const data = {
+                name: document.getElementById('name').value,
+                institution: document.getElementById('institution').value,
+                dob: document.getElementById('dob').value,
+                pob: document.getElementById('pob').value,
+                gender: document.getElementById('gender').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value || 'N/A',
+                address: document.getElementById('address').value
+            };
+
             try {
                 const { jsPDF } = window.jspdf;
-                const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+                const doc = new jsPDF();
+                
+                const BLUE = [12, 98, 158];
+                const GOLD = [197, 160, 89];
+                const LGRAY = [241, 245, 249];
+                const MGRAY = [226, 232, 240];
+                const DGRAY = [51, 51, 51];
 
-                const data = {
-                    name:        document.getElementById('name').value,
-                    institution: document.getElementById('institution').value,
-                    dob:         document.getElementById('dob').value,
-                    pob:         document.getElementById('pob').value,
-                    gender:      document.getElementById('gender').value,
-                    phone:       document.getElementById('phone').value,
-                    email:       document.getElementById('email').value || 'N/A',
-                    address:     document.getElementById('address').value
-                };
+                const pageW = doc.internal.pageSize.getWidth();
+                const lm = 15; 
+                const rm = 15;
+                const cw = pageW - lm - rm;
 
-                const refNo     = 'AKEC-ADM-' + (Math.floor(Math.random() * 90000) + 10000);
-                const submitDate = new Date().toLocaleDateString('en-GB');
+                // HEADER
+                doc.setFillColor(...BLUE);
+                doc.rect(0, 0, pageW, 40, 'F');
 
-                // Page dimensions
-                const pageW  = 210;
-                const pageH  = 297;
-                const lm     = 15;   // left margin
-                const rm     = 15;   // right margin
-                const cw     = pageW - lm - rm;  // content width = 180mm
-                let y        = 0;
+                doc.setTextColor(255, 255, 255);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(22);
+                doc.text('AJMEER KHAJA EDUCATIONAL COMPLEX', pageW / 2, 18, { align: 'center' });
+                
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'normal');
+                doc.text('Desamangalam, Thrissur, Kerala - 679532', pageW / 2, 25, { align: 'center' });
+                doc.text('Email: office.ajmeerkhajaeducationalcomplex@gmail.com | Mob: +91 9605977090', pageW / 2, 30, { align: 'center' });
 
-                // ── Helper: hex to r,g,b ─────────────────────────────────────
-                const hex = (h) => {
-                    const n = parseInt(h.replace('#',''), 16);
-                    return [(n>>16)&255, (n>>8)&255, n&255];
-                };
-                const BLUE  = hex('#0c629e');
-                const GOLD  = hex('#c5a059');
-                const LGRAY = hex('#f1f5f9');
-                const MGRAY = hex('#e2e8f0');
-                const FGRAY = hex('#f8fafc');
-                const DGRAY = hex('#555555');
-                const BLACK = hex('#333333');
+                // SUBTITLE
+                doc.setFillColor(...GOLD);
+                doc.rect(lm, 45, cw, 10, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(14);
+                doc.text('OFFICIAL ADMISSION APPLICATION', pageW / 2, 51.5, { align: 'center' });
 
-                // ── Helper: draw a table row ──────────────────────────────────
-                // labelW in mm, rowH in mm
-                const drawRow = (label, value, yPos, labelW, rowH, isShaded) => {
-                    const valX  = lm + labelW;
-                    const valW  = cw - labelW;
+                // META DATA
+                doc.setTextColor(100, 100, 100);
+                doc.setFontSize(8);
+                doc.setFont('helvetica', 'normal');
+                const refNo = 'AKEC-ADM-' + Math.floor(Math.random() * 90000 + 10000);
+                doc.text('Ref No: ' + refNo, lm, 60);
+                doc.text('Date: ' + new Date().toLocaleDateString('en-GB'), pageW - rm, 60, { align: 'right' });
 
-                    // Label cell background
-                    doc.setFillColor(...FGRAY);
-                    doc.rect(lm, yPos, labelW, rowH, 'F');
+                let y = 70;
 
-                    // Value cell background (white or shaded)
-                    doc.setFillColor(255, 255, 255);
-                    doc.rect(valX, yPos, valW, rowH, 'F');
-
-                    // Cell borders
-                    doc.setDrawColor(...MGRAY);
-                    doc.setLineWidth(0.3);
-                    doc.rect(lm,   yPos, labelW, rowH, 'S');
-                    doc.rect(valX, yPos, valW,   rowH, 'S');
-
-                    // Label text
-                    doc.setFont('helvetica', 'bold');
-                    doc.setFontSize(9);
-                    doc.setTextColor(...BLUE);
-                    doc.text(label, lm + 3, yPos + rowH / 2 + 1.5);
-
-                    // Value text — split long text inside cell
-                    doc.setFont('helvetica', 'normal');
-                    doc.setFontSize(9.5);
-                    doc.setTextColor(...BLACK);
-                    const lines = doc.splitTextToSize(value, valW - 6);
-                    const textStartY = yPos + (rowH - (lines.length - 1) * 4.5) / 2 + 1.5;
-                    doc.text(lines, valX + 3, textStartY);
-                };
-
-                // ── Helper: section header bar ────────────────────────────────
-                const drawSectionHeader = (title, yPos) => {
+                function drawSection(title) {
                     doc.setFillColor(...LGRAY);
-                    doc.rect(lm, yPos, cw, 8, 'F');
-                    doc.setFillColor(...BLUE);
-                    doc.rect(lm, yPos, 1.2, 8, 'F');
+                    doc.rect(lm, y, cw, 8, 'F');
+                    doc.setDrawColor(...BLUE);
+                    doc.setLineWidth(0.5);
+                    doc.line(lm, y, lm, y + 8);
+                    
+                    doc.setTextColor(...BLUE);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(11);
+                    doc.text(title, lm + 3, y + 6);
+                    y += 12;
+                }
+
+                function drawRow(label, value) {
+                    doc.setDrawColor(...MGRAY);
+                    doc.setLineWidth(0.1);
+                    doc.line(lm, y + 6, pageW - rm, y + 6);
+
+                    doc.setTextColor(...DGRAY);
                     doc.setFont('helvetica', 'bold');
                     doc.setFontSize(10);
-                    doc.setTextColor(...BLUE);
-                    doc.text(title, lm + 4, yPos + 5.5);
-                    return yPos + 10;
-                };
+                    doc.text(label, lm + 2, y + 4);
 
-                // ════════════════════════════════════════════════════════════
-                // HEADER BLOCK
-                // ════════════════════════════════════════════════════════════
-                y = 18;
+                    doc.setFont('helvetica', 'normal');
+                    doc.setTextColor(0, 0, 0);
+                    
+                    const textVal = String(value);
+                    const splitVal = doc.splitTextToSize(textVal, cw / 2);
+                    doc.text(splitVal, lm + 65, y + 4);
+                    
+                    y += (splitVal.length * 5) + 2;
+                }
 
-                // Institution name
-                doc.setFont('helvetica', 'bold');
-                doc.setFontSize(16);
-                doc.setTextColor(...BLUE);
-                doc.text('AJMEER KHAJA EDUCATIONAL COMPLEX', pageW / 2, y, { align: 'center' });
-                y += 7;
+                drawSection('Student Particulars');
+                drawRow('Full Name', data.name.toUpperCase());
+                drawRow('Institution', data.institution);
+                drawRow('Date of Birth', data.dob);
+                drawRow('Place of Birth', data.pob);
+                drawRow('Gender', data.gender);
 
-                // Sub-address
-                doc.setFont('helvetica', 'normal');
-                doc.setFontSize(8.5);
-                doc.setTextColor(...DGRAY);
-                doc.text('Desamangalam, Thrissur, Kerala - 679532  |  +91 9605 977090', pageW / 2, y, { align: 'center' });
-                y += 6;
-
-                // Blue divider line
-                doc.setDrawColor(...BLUE);
-                doc.setLineWidth(0.8);
-                doc.line(lm, y, pageW - rm, y);
                 y += 5;
+                drawSection('Contact & Communication');
+                drawRow('Mobile Number', data.phone);
+                drawRow('Email Address', data.email);
+                drawRow('Permanent Address', data.address);
 
-                // Document title
+                y = 230;
+                doc.setDrawColor(0,0,0);
+                doc.setLineWidth(0.2);
+                
+                doc.line(lm, y, lm + 50, y);
+                doc.line(pageW - rm - 50, y, pageW - rm, y);
+                
+                doc.setFontSize(9);
                 doc.setFont('helvetica', 'bold');
-                doc.setFontSize(13);
-                doc.setTextColor(...GOLD);
-                doc.text('OFFICIAL ADMISSION APPLICATION', pageW / 2, y, { align: 'center' });
-                y += 6;
-
-                // Ref and date on same line
-                doc.setFont('helvetica', 'normal');
-                doc.setFontSize(8);
-                doc.setTextColor(150, 150, 150);
-                doc.text('Ref: ' + refNo, lm, y);
-                doc.text('Date: ' + submitDate, pageW - rm, y, { align: 'right' });
-                y += 7;
-
-                // Thin separator
-                doc.setDrawColor(220, 220, 220);
-                doc.setLineWidth(0.3);
-                doc.line(lm, y, pageW - rm, y);
-                y += 8;
-
-                // ════════════════════════════════════════════════════════════
-                // SECTION 1 — Student Particulars
-                // ════════════════════════════════════════════════════════════
-                y = drawSectionHeader('Student Particulars', y);
-
-                const labelW = 62;
-                const rowH   = 9;
-                const rows1  = [
-                    ['Full Name of Applicant', data.name.toUpperCase()],
-                    ['Institution Applied For', data.institution],
-                    ['Date of Birth',           data.dob],
-                    ['Place of Birth',          data.pob],
-                    ['Gender',                  data.gender]
-                ];
-                rows1.forEach(([lbl, val]) => {
-                    drawRow(lbl, val, y, labelW, rowH);
-                    y += rowH;
-                });
-
-                y += 8;
-
-                // ════════════════════════════════════════════════════════════
-                // SECTION 2 — Communication Information
-                // ════════════════════════════════════════════════════════════
-                y = drawSectionHeader('Communication Information', y);
-
-                // Address needs taller row — measure lines first
-                const addrLines = doc.splitTextToSize(data.address, cw - labelW - 6);
-                const addrRowH  = Math.max(rowH, addrLines.length * 4.5 + 5);
-
-                const rows2 = [
-                    ['Primary Mobile Number', data.phone,   rowH],
-                    ['Email Address',         data.email,   rowH],
-                    ['Permanent Address',     data.address, addrRowH]
-                ];
-                rows2.forEach(([lbl, val, h]) => {
-                    drawRow(lbl, val, y, labelW, h);
-                    y += h;
-                });
-
-                y += 12;
-
-                // ════════════════════════════════════════════════════════════
-                // SIGNATURE SECTION
-                // ════════════════════════════════════════════════════════════
-                doc.setDrawColor(200, 200, 200);
-                doc.setLineWidth(0.3);
-                doc.line(lm, y, pageW - rm, y);
-                y += 10;
-
-                // Two signature boxes
-                const sigW = 55;
-                const sigY = y + 18;
-
-                // Left signature
-                doc.setDrawColor(...DGRAY);
-                doc.setLineWidth(0.4);
-                doc.line(lm, sigY, lm + sigW, sigY);
-                doc.setFont('helvetica', 'bold');
-                doc.setFontSize(8);
                 doc.setTextColor(...DGRAY);
-                doc.text('Signature of Parent / Guardian', lm + sigW / 2, sigY + 5, { align: 'center' });
+                doc.text('Signature of Guardian', lm + 25, y + 5, { align: 'center' });
+                doc.text('Office Seal & Signature', pageW - rm - 25, y + 5, { align: 'center' });
 
-                // Right signature
-                const sigRX = pageW - rm - sigW;
-                doc.line(sigRX, sigY, pageW - rm, sigY);
-                doc.text('Office Seal & Signature', sigRX + sigW / 2, sigY + 5, { align: 'center' });
-
-                y = sigY + 14;
-
-                // ════════════════════════════════════════════════════════════
-                // FOOTER NOTE
-                // ════════════════════════════════════════════════════════════
-                y += 6;
+                y = 265;
                 doc.setFillColor(248, 250, 252);
                 doc.setDrawColor(...MGRAY);
                 doc.setLineWidth(0.3);
@@ -599,9 +515,6 @@
                 doc.setFontSize(7.5);
                 doc.text('Ajmeer Khaja Educational Complex, Desamangalam, Thrissur, Kerala', pageW / 2, y + 12, { align: 'center' });
 
-                // ════════════════════════════════════════════════════════════
-                // SAVE
-                // ════════════════════════════════════════════════════════════
                 doc.save('AKEC_Admission_' + data.name.replace(/\s+/g, '_') + '.pdf');
 
             } catch (err) {
