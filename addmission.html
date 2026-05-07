@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admission Portal - Ajmeer Khaja Educational Complex.">
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <title>Admission Portal | Ajmeer Khaja Educational Complex</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+
+    <style>
+        /* --- PRESERVED FOUNDATION (DO NOT ALTER) --- */
+        :root {
+            --deep-blue: #0c629e;
+            --soft-gold: #c5a059;
+            --ice-white: #ffffff;
+            --soft-shadow: rgba(12, 98, 158, 0.1);
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #555; background-color: #f8fafc; }
+        
+        /* Header & Navbar */
+        .top-header { background-color: var(--deep-blue); color: white; padding: 10px 0; font-size: 14px; }
+        .top-header a { color: white; text-decoration: none; margin-right: 15px; }
+        .navbar-brand img { max-width: 180px; height: 70px; }
+        .nav-link { color: var(--deep-blue) !important; font-weight: 600; margin: 0 10px; }
+        
+        /* Buttons */
+        .default-btn {
+            background-color: var(--deep-blue);
+            color: white !important;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .default-btn:hover { background-color: var(--soft-gold); transform: translateY(-3px); }
+
+        /* --- ADMISSION PORTAL SURGICAL ADDITIONS (.akec-admission- prefix) --- */
+        .akec-admission-hero {
+            background: linear-gradient(rgba(12, 98, 158, 0.9), rgba(12, 98, 158, 0.9)), url('institution.jpeg');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+            border-bottom: 5px solid var(--soft-gold);
+        }
+
+        .akec-admission-container {
+            margin-top: -60px;
+            margin-bottom: 80px;
+        }
+
+        .akec-admission-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px var(--soft-shadow);
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .akec-admission-sidebar {
+            background-color: #fcfcfc;
+            padding: 40px;
+            border-right: 1px solid #eee;
+        }
+
+        .akec-form-group {
+            margin-bottom: 20px;
+        }
+
+        .akec-input-label {
+            display: block;
+            font-weight: 600;
+            color: var(--deep-blue);
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .akec-input-field {
+            width: 100%;
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 2px solid #f0f0f0;
+            transition: 0.3s;
+        }
+
+        .akec-input-field:focus {
+            border-color: var(--soft-gold);
+            outline: none;
+            background-color: #fff;
+        }
+
+        /* Dropdown logic (Preserved) */
+        @media (min-width: 992px) {
+            .navbar-nav .nav-item.dropdown:hover > .dropdown-menu {
+                display: block; opacity: 1; visibility: visible; transform: translateY(0);
+            }
+        }
+        .navbar-nav .dropdown-menu {
+            display: block; opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.3s ease-in-out; border: none; border-top: 3px solid var(--soft-gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-radius: 0 0 10px 10px;
+        }
+        
+        /* Footer (Preserved) */
+        footer { background: #1a1a1a; color: #ccc; padding: 60px 0; }
+        footer h3 { color: white; margin-bottom: 25px; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links a { color: #ccc; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section (Preserved from index) -->
+    <div class="top-header">
+        <div class="container d-flex justify-content-between">
+            <div>
+                <a href="tel:+919605977090"><i class="ri-phone-fill"></i> +91 96 05 977090</a>
+                <a href="mailto:office.ajmeerkhajaeducationalcomplex@gmail.com"><i class="ri-mail-fill"></i> office.ajmeerkhajaeducationalcomplex</a>
+            </div>
+            <div class="d-none d-md-block">
+                <a href="#">Career</a> | <a href="admission.html">Admission</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation (Preserved from index) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.webp" alt="AKEC Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="academics.html">Academics</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="dawa.html">Zanchari Excellence Centre For Da'wa</a></li>
+                            <li><a class="dropdown-item" href="hifz.html">Khaja Mueenudheen Hifzul Qur'an Academy</a></li>
+                            <li><a class="dropdown-item" href="madrassa.html">Ajmeer Khaja Residential Madrassa</a></li>
+                            <li><a class="dropdown-item" href="garden.html">Mueeniyya Garden Of Qur'an Studies For Girls</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <a href="#" class="default-btn">Donate Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admission Portal Hero -->
+    <section class="akec-admission-hero">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Admission Portal 2026</h1>
+            <p class="lead">Submit your application online for the upcoming academic year.</p>
+        </div>
+    </section>
+
+    <!-- Application Form Container -->
+    <main class="container akec-admission-container">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                <div class="akec-admission-card">
+                    <div class="row g-0">
+                        <!-- Sidebar -->
+                        <div class="col-md-4 col-lg-3 akec-admission-sidebar d-none d-md-block">
+                            <h5 class="mb-4 fw-bold text-dark">Admission Support</h5>
+                            <p class="small text-muted mb-4">Complete the form to start your application process at AKEC.</p>
+                            
+                            <div class="p-3 rounded" style="background: var(--soft-shadow);">
+                                <p class="small mb-1 text-dark fw-bold">Help Desk</p>
+                                <p class="small mb-0">For queries, call us:</p>
+                                <a href="tel:+919605977090" class="fw-bold text-decoration-none" style="color:var(--deep-blue);">+91 9605 977090</a>
+                            </div>
+                        </div>
+
+                        <!-- Form Area -->
+                        <div class="col-md-8 col-lg-9 p-4 p-lg-5">
+                            <h3 class="fw-bold mb-4" style="color:var(--deep-blue);">Student Application Form</h3>
+                            <form id="akec-admission-form">
+                                <div class="row">
+                                    <div class="col-md-12 akec-form-group">
+                                        <label class="akec-input-label">Full Name of Applicant</label>
+                                        <input type="text" id="student_name" class="akec-input-field" placeholder="Student's official name" required>
+                                    </div>
+                                    <div class="col-md-6 akec-form-group">
+                                        <label class="akec-input-label">Applied Course/Institution</label>
+                                        <select id="institution" class="akec-input-field" required>
+                                            <option selected disabled value="">Choose institution...</option>
+                                            <option>Zanchari Excellence Centre For Da'wa</option>
+                                            <option>Khaja Mueenudheen Hifzul Qur'an Academy</option>
+                                            <option>Ajmeer Khaja Residential Madrassa</option>
+                                            <option>Mueeniyya Garden Of Qur'an Studies For Girls</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 akec-form-group">
+                                        <label class="akec-input-label">Date of Birth</label>
+                                        <input type="date" id="dob" class="akec-input-field" required>
+                                    </div>
+                                    <div class="col-md-6 akec-form-group">
+                                        <label class="akec-input-label">Place of Birth</label>
+                                        <input type="text" id="pob" class="akec-input-field" placeholder="City/Town" required>
+                                    </div>
+                                    <div class="col-md-6 akec-form-group">
+                                        <label class="akec-input-label">Gender</label>
+                                        <select id="gender" class="akec-input-field" required>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 akec-form-group mt-3">
+                                        <h5 class="fw-bold mb-3" style="color:var(--deep-blue); font-size: 18px;">Contact Information</h5>
+                                    </div>
+                                    <div class="col-md-6 akec-form-group">
+                                        <label class="akec-input-label">Primary Phone</label>
+                                        <input type="tel" id="phone" class="akec-input-field" placeholder="+91" required>
+                                    </div>
+                                    <div class="col-md-6 akec-form-group">
+                                        <label class="akec-input-label">Email Address</label>
+                                        <input type="email" id="email" class="akec-input-field" placeholder="example@mail.com">
+                                    </div>
+                                    <div class="col-md-12 akec-form-group">
+                                        <label class="akec-input-label">Permanent Address</label>
+                                        <textarea id="address" class="akec-input-field" rows="3" placeholder="Full residential address..." required></textarea>
+                                    </div>
+                                    
+                                    <div class="col-md-12 mt-4 pt-3 border-top d-flex justify-content-end">
+                                        <button type="submit" class="default-btn">Submit via WhatsApp <i class="ri-whatsapp-line ms-2"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h3>About AKEC</h3>
+                    <p>Ajmeer Khaja Educational Complex is a leading academic and charitable organization committed to holistic social development.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">History</a></li>
+                        <li><a href="academics.html">Academic Programs</a></li>
+                        <li><a href="contact.html">Help Desk</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Admission Office</h3>
+                    <p><i class="ri-map-pin-line"></i>Desamangalam, Thrissur, Kerala</p>
+                    <p><i class="ri-phone-line"></i>+91 9605 977090, +91 9656 475770</p>
+                    <p><i class="ri-mail-line"></i>office.ajmeerkhajaeducationalcomplex@gmail.com</p>
+                </div>
+            </div>
+            <hr class="mt-5" style="border-color: #444;">
+            <div class="text-center pt-3">
+                <p>Copyright © 2026 Ajmeer Khaja Educational Complex. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- WhatsApp Integration Script -->
+    <script>
+        document.getElementById('akec-admission-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Collect Form Data
+            const name = document.getElementById('student_name').value;
+            const institution = document.getElementById('institution').value;
+            const dob = document.getElementById('dob').value;
+            const pob = document.getElementById('pob').value;
+            const gender = document.getElementById('gender').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value || 'N/A';
+            const address = document.getElementById('address').value;
+
+            // WhatsApp Number
+            const whatsappNumber = "919605977090";
+
+            // Format Message
+            const message = `*AKEC ADMISSION APPLICATION*%0A` +
+                            `------------------------------%0A` +
+                            `*Student Name:* ${name}%0A` +
+                            `*Institution:* ${institution}%0A` +
+                            `*Date of Birth:* ${dob}%0A` +
+                            `*Place of Birth:* ${pob}%0A` +
+                            `*Gender:* ${gender}%0A` +
+                            `*Phone:* ${phone}%0A` +
+                            `*Email:* ${email}%0A` +
+                            `*Address:* ${address}%0A` +
+                            `------------------------------%0A` +
+                            `_Submitted via Admission Portal_`;
+
+            // Open WhatsApp Link
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
