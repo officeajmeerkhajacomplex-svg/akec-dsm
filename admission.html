@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
     
     <!-- PDF Library Integration -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
         /* --- PRESERVED FOUNDATION (DO NOT ALTER) --- */
@@ -375,114 +375,242 @@
             btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Generating...';
             btn.disabled = true;
 
-            const data = {
-                name: document.getElementById('name').value,
-                institution: document.getElementById('institution').value,
-                dob: document.getElementById('dob').value,
-                pob: document.getElementById('pob').value,
-                gender: document.getElementById('gender').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value || 'N/A',
-                address: document.getElementById('address').value
-            };
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
 
-            // MODIFICATION: Enhanced template ensuring ALL typed information is captured in the PDF
-            const pdfContainer = document.createElement('div');
-            pdfContainer.style.width = '700px'; 
-            pdfContainer.style.padding = '50px';
-            pdfContainer.style.backgroundColor = '#ffffff';
-            
-            pdfContainer.innerHTML = `
-                <div style="font-family: 'Helvetica', 'Arial', sans-serif; color: #333; line-height: 1.6; font-size: 13px;">
-                    <div style="text-align: center; border-bottom: 2px solid #0c629e; padding-bottom: 20px; margin-bottom: 30px;">
-                        <h1 style="color: #0c629e; margin: 0; font-size: 26px; text-transform: uppercase; font-weight: 800;">Ajmeer Khaja Educational Complex</h1>
-                        <p style="margin: 5px 0; font-size: 14px; color: #555;">Desamangalam, Thrissur, Kerala - 679532</p>
-                        <p style="margin: 10px 0; font-size: 18px; font-weight: bold; color: #c5a059; border-top: 1px solid #eee; display: inline-block; padding-top: 10px;">OFFICIAL ADMISSION APPLICATION</p>
-                        <div style="display: flex; justify-content: space-between; font-size: 11px; color: #888; margin-top: 10px;">
-                            <span>Reference: AKEC-ADM-${Math.floor(Math.random()*90000) + 10000}</span>
-                            <span>Submission Date: ${new Date().toLocaleDateString('en-GB')}</span>
-                        </div>
-                    </div>
+                const data = {
+                    name:        document.getElementById('name').value,
+                    institution: document.getElementById('institution').value,
+                    dob:         document.getElementById('dob').value,
+                    pob:         document.getElementById('pob').value,
+                    gender:      document.getElementById('gender').value,
+                    phone:       document.getElementById('phone').value,
+                    email:       document.getElementById('email').value || 'N/A',
+                    address:     document.getElementById('address').value
+                };
 
-                    <div style="margin-bottom: 25px;">
-                        <h3 style="background: #f1f5f9; padding: 10px 15px; border-left: 5px solid #0c629e; color: #0c629e; font-size: 16px; margin-bottom: 15px; font-weight: 700;">Student Particulars</h3>
-                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
-                            <tr>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0; width: 35%; font-weight: bold; background: #f8fafc; color: #0c629e;">Full Name of Applicant</td>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: 600; text-transform: uppercase;">${data.name}</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; background: #f8fafc; color: #0c629e;">Institution Applied For</td>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0;">${data.institution}</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; background: #f8fafc; color: #0c629e;">Date of Birth</td>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0;">${data.dob}</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; background: #f8fafc; color: #0c629e;">Place of Birth</td>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0;">${data.pob}</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; background: #f8fafc; color: #0c629e;">Gender</td>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0;">${data.gender}</td>
-                            </tr>
-                        </table>
-                    </div>
+                const refNo     = 'AKEC-ADM-' + (Math.floor(Math.random() * 90000) + 10000);
+                const submitDate = new Date().toLocaleDateString('en-GB');
 
-                    <div style="margin-bottom: 30px;">
-                        <h3 style="background: #f1f5f9; padding: 10px 15px; border-left: 5px solid #0c629e; color: #0c629e; font-size: 16px; margin-bottom: 15px; font-weight: 700;">Communication Information</h3>
-                        <table style="width: 100%; border-collapse: collapse;">
-                            <tr>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0; width: 35%; font-weight: bold; background: #f8fafc; color: #0c629e;">Primary Mobile Number</td>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: 600;">${data.phone}</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; background: #f8fafc; color: #0c629e;">Email Address</td>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0;">${data.email}</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; background: #f8fafc; color: #0c629e; vertical-align: top;">Permanent Address</td>
-                                <td style="padding: 12px; border: 1px solid #e2e8f0; line-height: 1.8;">${data.address}</td>
-                            </tr>
-                        </table>
-                    </div>
+                // Page dimensions
+                const pageW  = 210;
+                const pageH  = 297;
+                const lm     = 15;   // left margin
+                const rm     = 15;   // right margin
+                const cw     = pageW - lm - rm;  // content width = 180mm
+                let y        = 0;
 
-                    <div style="margin-top: 60px; border-top: 1px solid #eee; padding-top: 20px;">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                            <div style="text-align: center; width: 200px;">
-                                <div style="border-bottom: 1px solid #333; height: 30px; margin-bottom: 10px;"></div>
-                                <p style="font-size: 11px; margin: 0; font-weight: bold;">Signature of Parent/Guardian</p>
-                            </div>
-                            <div style="text-align: center; width: 200px;">
-                                <div style="border-bottom: 1px solid #333; height: 30px; margin-bottom: 10px;"></div>
-                                <p style="font-size: 11px; margin: 0; font-weight: bold;">Office Seal & Signature</p>
-                            </div>
-                        </div>
-                    </div>
+                // ── Helper: hex to r,g,b ─────────────────────────────────────
+                const hex = (h) => {
+                    const n = parseInt(h.replace('#',''), 16);
+                    return [(n>>16)&255, (n>>8)&255, n&255];
+                };
+                const BLUE  = hex('#0c629e');
+                const GOLD  = hex('#c5a059');
+                const LGRAY = hex('#f1f5f9');
+                const MGRAY = hex('#e2e8f0');
+                const FGRAY = hex('#f8fafc');
+                const DGRAY = hex('#555555');
+                const BLACK = hex('#333333');
 
-                    <div style="margin-top: 50px; padding: 15px; background: #fcfcfc; border-radius: 10px; font-size: 10.5px; text-align: center; color: #777; border: 1px solid #eee;">
-                        <p style="margin: 0;">This application form is electronically generated and remains valid for processing at AKEC office. Please present a physical copy during the interview process along with necessary certificates.</p>
-                        <p style="margin: 5px 0 0; color: #0c629e;"><strong>Ajmeer Khaja Educational Complex, Desamangalam, Thrissur, Kerala</strong></p>
-                    </div>
-                </div>
-            `;
+                // ── Helper: draw a table row ──────────────────────────────────
+                // labelW in mm, rowH in mm
+                const drawRow = (label, value, yPos, labelW, rowH, isShaded) => {
+                    const valX  = lm + labelW;
+                    const valW  = cw - labelW;
 
-            const opt = {
-                margin: [0.3, 0.3, 0.3, 0.3], // Small consistent margins for one-page fit
-                filename: `AKEC_Admission_${data.name.replace(/\s+/g, '_')}.pdf`,
-                image: { type: 'jpeg', quality: 1.0 },
-                html2canvas: { scale: 3, useCORS: true, logging: false },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
+                    // Label cell background
+                    doc.setFillColor(...FGRAY);
+                    doc.rect(lm, yPos, labelW, rowH, 'F');
 
-            html2pdf().set(opt).from(pdfContainer).save().then(() => {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }).catch(err => {
-                btn.innerHTML = "Retry Download";
-                btn.disabled = false;
-            });
+                    // Value cell background (white or shaded)
+                    doc.setFillColor(255, 255, 255);
+                    doc.rect(valX, yPos, valW, rowH, 'F');
+
+                    // Cell borders
+                    doc.setDrawColor(...MGRAY);
+                    doc.setLineWidth(0.3);
+                    doc.rect(lm,   yPos, labelW, rowH, 'S');
+                    doc.rect(valX, yPos, valW,   rowH, 'S');
+
+                    // Label text
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(9);
+                    doc.setTextColor(...BLUE);
+                    doc.text(label, lm + 3, yPos + rowH / 2 + 1.5);
+
+                    // Value text — split long text inside cell
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(9.5);
+                    doc.setTextColor(...BLACK);
+                    const lines = doc.splitTextToSize(value, valW - 6);
+                    const textStartY = yPos + (rowH - (lines.length - 1) * 4.5) / 2 + 1.5;
+                    doc.text(lines, valX + 3, textStartY);
+                };
+
+                // ── Helper: section header bar ────────────────────────────────
+                const drawSectionHeader = (title, yPos) => {
+                    doc.setFillColor(...LGRAY);
+                    doc.rect(lm, yPos, cw, 8, 'F');
+                    doc.setFillColor(...BLUE);
+                    doc.rect(lm, yPos, 1.2, 8, 'F');
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(10);
+                    doc.setTextColor(...BLUE);
+                    doc.text(title, lm + 4, yPos + 5.5);
+                    return yPos + 10;
+                };
+
+                // ════════════════════════════════════════════════════════════
+                // HEADER BLOCK
+                // ════════════════════════════════════════════════════════════
+                y = 18;
+
+                // Institution name
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(16);
+                doc.setTextColor(...BLUE);
+                doc.text('AJMEER KHAJA EDUCATIONAL COMPLEX', pageW / 2, y, { align: 'center' });
+                y += 7;
+
+                // Sub-address
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8.5);
+                doc.setTextColor(...DGRAY);
+                doc.text('Desamangalam, Thrissur, Kerala - 679532  |  +91 9605 977090', pageW / 2, y, { align: 'center' });
+                y += 6;
+
+                // Blue divider line
+                doc.setDrawColor(...BLUE);
+                doc.setLineWidth(0.8);
+                doc.line(lm, y, pageW - rm, y);
+                y += 5;
+
+                // Document title
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(13);
+                doc.setTextColor(...GOLD);
+                doc.text('OFFICIAL ADMISSION APPLICATION', pageW / 2, y, { align: 'center' });
+                y += 6;
+
+                // Ref and date on same line
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8);
+                doc.setTextColor(150, 150, 150);
+                doc.text('Ref: ' + refNo, lm, y);
+                doc.text('Date: ' + submitDate, pageW - rm, y, { align: 'right' });
+                y += 7;
+
+                // Thin separator
+                doc.setDrawColor(220, 220, 220);
+                doc.setLineWidth(0.3);
+                doc.line(lm, y, pageW - rm, y);
+                y += 8;
+
+                // ════════════════════════════════════════════════════════════
+                // SECTION 1 — Student Particulars
+                // ════════════════════════════════════════════════════════════
+                y = drawSectionHeader('Student Particulars', y);
+
+                const labelW = 62;
+                const rowH   = 9;
+                const rows1  = [
+                    ['Full Name of Applicant', data.name.toUpperCase()],
+                    ['Institution Applied For', data.institution],
+                    ['Date of Birth',           data.dob],
+                    ['Place of Birth',          data.pob],
+                    ['Gender',                  data.gender]
+                ];
+                rows1.forEach(([lbl, val]) => {
+                    drawRow(lbl, val, y, labelW, rowH);
+                    y += rowH;
+                });
+
+                y += 8;
+
+                // ════════════════════════════════════════════════════════════
+                // SECTION 2 — Communication Information
+                // ════════════════════════════════════════════════════════════
+                y = drawSectionHeader('Communication Information', y);
+
+                // Address needs taller row — measure lines first
+                const addrLines = doc.splitTextToSize(data.address, cw - labelW - 6);
+                const addrRowH  = Math.max(rowH, addrLines.length * 4.5 + 5);
+
+                const rows2 = [
+                    ['Primary Mobile Number', data.phone,   rowH],
+                    ['Email Address',         data.email,   rowH],
+                    ['Permanent Address',     data.address, addrRowH]
+                ];
+                rows2.forEach(([lbl, val, h]) => {
+                    drawRow(lbl, val, y, labelW, h);
+                    y += h;
+                });
+
+                y += 12;
+
+                // ════════════════════════════════════════════════════════════
+                // SIGNATURE SECTION
+                // ════════════════════════════════════════════════════════════
+                doc.setDrawColor(200, 200, 200);
+                doc.setLineWidth(0.3);
+                doc.line(lm, y, pageW - rm, y);
+                y += 10;
+
+                // Two signature boxes
+                const sigW = 55;
+                const sigY = y + 18;
+
+                // Left signature
+                doc.setDrawColor(...DGRAY);
+                doc.setLineWidth(0.4);
+                doc.line(lm, sigY, lm + sigW, sigY);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(8);
+                doc.setTextColor(...DGRAY);
+                doc.text('Signature of Parent / Guardian', lm + sigW / 2, sigY + 5, { align: 'center' });
+
+                // Right signature
+                const sigRX = pageW - rm - sigW;
+                doc.line(sigRX, sigY, pageW - rm, sigY);
+                doc.text('Office Seal & Signature', sigRX + sigW / 2, sigY + 5, { align: 'center' });
+
+                y = sigY + 14;
+
+                // ════════════════════════════════════════════════════════════
+                // FOOTER NOTE
+                // ════════════════════════════════════════════════════════════
+                y += 6;
+                doc.setFillColor(248, 250, 252);
+                doc.setDrawColor(...MGRAY);
+                doc.setLineWidth(0.3);
+                doc.roundedRect(lm, y, cw, 16, 2, 2, 'FD');
+
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(7.5);
+                doc.setTextColor(130, 130, 130);
+                const footerText = 'This application is electronically generated and valid for processing at AKEC office. Present a physical copy during the interview along with required certificates.';
+                const footerLines = doc.splitTextToSize(footerText, cw - 8);
+                doc.text(footerLines, pageW / 2, y + 5, { align: 'center' });
+
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(...BLUE);
+                doc.setFontSize(7.5);
+                doc.text('Ajmeer Khaja Educational Complex, Desamangalam, Thrissur, Kerala', pageW / 2, y + 12, { align: 'center' });
+
+                // ════════════════════════════════════════════════════════════
+                // SAVE
+                // ════════════════════════════════════════════════════════════
+                doc.save('AKEC_Admission_' + data.name.replace(/\s+/g, '_') + '.pdf');
+
+            } catch (err) {
+                console.error('PDF Error:', err);
+                alert('PDF generation failed. Please try again.');
+            }
+
+            btn.innerHTML = originalText;
+            btn.disabled = false;
         });
     </script>
 </body>
