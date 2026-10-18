@@ -8,6 +8,7 @@ on:
       - "scripts/optimize_media.py"
       - "scripts/purge_css.mjs"
       - "scripts/generate_captions.py"
+      - "scripts/update_accessibility_performance.py"
   workflow_dispatch:
 
 permissions:
@@ -58,6 +59,9 @@ jobs:
 
       - name: Generate a real caption track for the homepage video
         run: python scripts/generate_captions.py
+
+      - name: Apply accessibility, responsive image, and CSS delivery fixes
+        run: python scripts/update_accessibility_performance.py
 
       - name: Commit optimized assets and HTML references
         id: commit-assets
