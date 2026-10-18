@@ -1,0 +1,140 @@
+name: AKEC accessibility audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "*.html"
+      - ".github/workflows/accessibility-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: akec-accessibility-audit
+  cancel-in-progress: false
+
+jobs:
+  lighthouse-accessibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Wait for Vercel to deploy the latest HTML
+        shell: bash
+        run: |
+          for attempt in $(seq 1 30); do
+            HTML="$(curl --silent --show-error --location --max-time 20 https://akec.vercel.app/ || true)"
+            if printf '%s' "$HTML" | grep -qi 'aria-label="Toggle navigation"' &&
+               printf '%s' "$HTML" | grep -qi '#805f16'; then
+              echo "The updated accessibility fixes are live on Vercel."
+              exit 0
+            fi
+            echo "Waiting for latest HTML deployment (attempt $attempt/30)."
+            sleep 10
+          done
+          echo "The latest HTML changes were not detected on the production alias."
+          exit 1
+
+      - name: Run Lighthouse accessibility audits (mobile, every page)
+        shell: bash
+        run: |
+          mkdir -p reports
+          for page in index about admission contact dawa garden hifz madrassa; do
+            case "$page" in
+              index) route="" ;;
+              about) route="about.html" ;;
+              admission) route="admission.html" ;;
+              contact) route="contact.html" ;;
+              dawa) route="dawa.html" ;;
+              garden) route="garden.html" ;;
+              hifz) route="hifz.html" ;;
+              madrassa) route="madrassa.html" ;;
+            esac
+            url="https://akec.vercel.app/$route"
+            echo "Auditing mobile accessibility: $url"
+            npx --yes lighthouse@12 "$url" \
+              --only-categories=accessibility \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --output=json \
+              --output-path="reports/$page-mobile" \
+              --quiet
+          done
+
+      - name: Run Lighthouse accessibility audit (desktop homepage)
+        run: |
+          npx --yes lighthouse@12 https://akec.vercel.app/ \
+            --preset=desktop \
+            --only-categories=accessibility \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+            --output=json \
+            --output-path=reports/index-desktop \
+            --quiet
+
+      - name: Summarize accessibility scores and failed audits
+        shell: bash
+        run: |
+          python - <<'PY'
+          import glob
+          import json
+          from pathlib import Path
+
+          summary = [
+              "# AKEC accessibility audit",
+              "",
+              "Lighthouse accessibility results for the live production site.",
+              "",
+              "| Page / device | Accessibility score | Failed scored audits |",
+              "|---|---:|---|",
+          ]
+          overall_failures = []
+          files = sorted(glob.glob("reports/**/*.json", recursive=True))
+          for filename in files:
+              data = json.loads(Path(filename).read_text(encoding="utf-8"))
+              category = data.get("categories", {}).get("accessibility", {})
+              score = category.get("score")
+              score_text = f"{round(score * 100)}/100" if score is not None else "n/a"
+              failed = []
+              for ref in category.get("auditRefs", []):
+                  audit = data.get("audits", {}).get(ref.get("id", ""), {})
+                  if audit.get("score") is not None and audit.get("score") < 1 and audit.get("scoreDisplayMode") != "notApplicable":
+                      failed.append((ref.get("id", "unknown"), audit.get("title", "Unnamed audit"), audit))
+              label = Path(filename).name.replace(".report.json", "").replace(".json", "").replace("-", " ").title()
+              details = ", ".join(f"{item[0]} ({item[1]})" for item in failed) if failed else "None"
+              summary.append(f"| {label} | **{score_text}** | {details} |")
+              for audit_id, title, audit in failed:
+                  overall_failures.append(f"### {label}: {title} ({audit_id})")
+                  overall_failures.append(audit.get("description", ""))
+                  nodes = audit.get("details", {}).get("items", [])
+                  for node in nodes[:10]:
+                      details = node.get("node", {})
+                      selector = details.get("selector", "(selector unavailable)")
+                      snippet = details.get("snippet", "").replace("\n", " ")
+                      overall_failures.append(f"- {selector} — {snippet[:240]}")
+                  overall_failures.append("")
+          summary += ["", "## Remaining scored issues", ""]
+          summary += overall_failures or ["No scored accessibility failures were reported in these runs."]
+          Path("accessibility-summary.md").write_text("\n".join(summary), encoding="utf-8")
+          print("\n".join(summary))
+          PY
+          cat accessibility-summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Lighthouse accessibility reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: akec-accessibility-lighthouse-reports
+          path: |
+            reports/*.report.json
+            reports/*.json
+            accessibility-summary.md
+          if-no-files-found: warn
+          retention-days: 30
