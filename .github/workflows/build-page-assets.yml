@@ -1,0 +1,61 @@
+name: Build responsive image and page CSS assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/generate_responsive_assets.py"
+      - "scripts/purge_page_css.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: akec-page-assets
+  cancel-in-progress: false
+
+jobs:
+  build-page-assets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install image and CSS tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install Pillow
+          npm init -y
+          npm install --no-save purgecss
+
+      - name: Build lower-byte responsive image candidates
+        run: python scripts/generate_responsive_assets.py
+
+      - name: Generate page-specific Bootstrap CSS
+        run: node scripts/purge_page_css.mjs
+
+      - name: Commit only generated assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- assets-optimized
+          if git diff --cached --quiet; then
+            echo "No responsive asset changes to commit."
+          else
+            git commit -m "Add smaller gallery variants and page-specific CSS"
+            git push origin HEAD:main
+          fi
