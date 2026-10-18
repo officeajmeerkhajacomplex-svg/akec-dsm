@@ -1,0 +1,44 @@
+/*
+* Remix Icon v2.5.0
+* https://remixicon.com
+* https://github.com/Remix-Design/RemixIcon
+*
+* Copyright RemixIcon.com
+* Released under the Apache License Version 2.0
+*
+* Date: 2020-05-23
+*/
+@font-face{font-family:"remixicon";src:url('/assets-optimized/fonts/remixicon.woff2') format('woff2');font-weight:normal;font-style:normal;font-display:swap}
+
+[class^="ri-"], [class*=" ri-"] {
+  font-family: 'remixicon' !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.ri-check-double-line:before { content: "\eb79"; }
+.ri-checkbox-circle-fill:before { content: "\eb80"; }
+.ri-eye-line:before { content: "\ecb5"; }
+.ri-facebook-fill:before { content: "\ecbc"; }
+.ri-file-pdf-line:before { content: "\ecfd"; }
+.ri-group-line:before { content: "\ede3"; }
+.ri-heart-line:before { content: "\ee0f"; }
+.ri-heart-pulse-line:before { content: "\ee11"; }
+.ri-information-line:before { content: "\ee59"; }
+.ri-instagram-fill:before { content: "\ee65"; }
+.ri-instagram-line:before { content: "\ee66"; }
+.ri-leaf-line:before { content: "\eea3"; }
+.ri-mail-fill:before { content: "\eef3"; }
+.ri-mail-line:before { content: "\eef6"; }
+.ri-map-pin-2-fill:before { content: "\ef09"; }
+.ri-map-pin-line:before { content: "\ef14"; }
+.ri-medal-line:before { content: "\ef28"; }
+.ri-menu-line:before { content: "\ef3e"; }
+.ri-phone-fill:before { content: "\efe9"; }
+.ri-phone-line:before { content: "\efec"; }
+.ri-rocket-line:before { content: "\f096"; }
+.ri-send-plane-fill:before { content: "\f0d9"; }
+.ri-user-heart-line:before { content: "\f263"; }
+.ri-whatsapp-fill:before { content: "\f2bb"; }
+.ri-youtube-fill:before { content: "\f2d4"; }
+
