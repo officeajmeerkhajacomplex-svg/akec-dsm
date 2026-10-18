@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/optimize-media.yml"
+      - "scripts/optimize_media.py"
+      - "scripts/purge_css.mjs"
+      - "scripts/generate_captions.py"
   workflow_dispatch:
 
 permissions:
@@ -17,7 +20,7 @@ concurrency:
 jobs:
   optimize-and-audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - name: Check out production branch
         uses: actions/checkout@v4
@@ -30,17 +33,31 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Set up Node for CSS processing
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
       - name: Install image optimization tools
         run: |
           python -m pip install --upgrade pip
-          python -m pip install Pillow
+          python -m pip install Pillow openai-whisper
           if ! command -v ffmpeg >/dev/null 2>&1; then
             sudo apt-get update
             sudo apt-get install -y ffmpeg
           fi
 
-      - name: Generate responsive images and compressed video
+      - name: Build purged, self-hosted vendor CSS
+        run: |
+          npm init -y
+          npm install --no-save purgecss
+          node scripts/purge_css.mjs
+
+      - name: Generate responsive images, poster, and compressed video
         run: python scripts/optimize_media.py
+
+      - name: Generate a real caption track for the homepage video
+        run: python scripts/generate_captions.py
 
       - name: Commit optimized assets and HTML references
         id: commit-assets

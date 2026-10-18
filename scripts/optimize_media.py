@@ -29,7 +29,7 @@ def is_gallery(path: Path) -> bool:
 
 def widths_for(path: Path, original_width: int) -> list[int]:
     if is_logo(path):
-        desired = [160, 320, 480]
+        desired = [48, 64, 96, 128, 160, 320, 480]
     elif is_gallery(path):
         desired = [320, 640, 960, 1280]
     elif path.stem.lower() == "institution":
@@ -158,7 +158,8 @@ def update_html(page: Path, source_map: dict[str, dict]) -> bool:
         elif "akec-secretary-img" in classes:
             sizes = "(max-width: 767px) 100vw, 42vw"
         elif "logo" in base or "logo" in alt:
-            sizes = "180px"
+            style = (get_html_attr(tag, "style") or "").lower()
+            sizes = "60px" if "max-height: 80px" in style else "(max-width: 767px) 40px, 50px"
         elif re.search(r"\bgallery\s*\d+", alt):
             sizes = "(max-width: 767px) 50vw, 280px"
         elif "admission" in base:
@@ -203,6 +204,32 @@ def update_html(page: Path, source_map: dict[str, dict]) -> bool:
         return True
     return False
 
+def optimize_poster() -> str | None:
+    """Extract a small, representative WebP frame for the video poster."""
+    source = ROOT / "nasim.mp4"
+    ffmpeg = shutil.which("ffmpeg")
+    if not source.exists() or not ffmpeg:
+        return None
+    output = OUT / "nasim-poster.webp"
+    command = [
+        ffmpeg, "-y", "-hide_banner", "-loglevel", "error",
+        "-ss", "2", "-i", str(source),
+        "-frames:v", "1", "-an",
+        "-vf", "scale=960:540:force_original_aspect_ratio=decrease",
+        "-c:v", "libwebp", "-quality", "76", "-compression_level", "6",
+        str(output),
+    ]
+    try:
+        subprocess.run(command, check=True, timeout=120)
+        if output.exists() and output.stat().st_size > 0:
+            print(f"Video poster generated: {output.stat().st_size / 1024:.1f} KiB")
+            return rel_asset(output)
+    except Exception as exc:
+        print(f"WARNING: video poster generation skipped: {exc}")
+    output.unlink(missing_ok=True)
+    return None
+
+
 def optimize_video() -> dict | None:
     source = ROOT / "nasim.mp4"
     ffmpeg = shutil.which("ffmpeg")
@@ -244,6 +271,7 @@ def main() -> None:
             changed_pages.append(page.name)
 
     video_row = optimize_video()
+    poster_path = optimize_poster()
     if video_row and video_row.get("used"):
         page = ROOT / "index.html"
         if page.exists():
@@ -258,6 +286,22 @@ def main() -> None:
             if "index.html" not in changed_pages:
                 changed_pages.append("index.html")
 
+    if poster_path:
+        page = ROOT / "index.html"
+        if page.exists():
+            content = page.read_text(encoding="utf-8")
+            updated = re.sub(
+                r"<video\b[^>]*\bid=['\"]akecScrollVideo['\"][^>]*>",
+                lambda m: set_html_attr(m.group(0), "poster", poster_path),
+                content,
+                count=1,
+                flags=re.I,
+            )
+            if updated != content:
+                page.write_text(updated, encoding="utf-8")
+                if "index.html" not in changed_pages:
+                    changed_pages.append("index.html")
+
     report = {
         "sources": rows,
         "source_image_bytes": sum(r["source_bytes"] for r in rows),
@@ -267,6 +311,7 @@ def main() -> None:
         "generated_files": [v["path"] for r in rows for v in r["variants"]],
         "changed_pages": changed_pages,
         "video": video_row,
+        "poster": poster_path,
         "probe_path": next((v["path"] for r in rows if r["source"].lower() == "logo.webp" for v in r["variants"] if v["width"] <= 160), None),
     }
     REPORT.write_text(json.dumps(report, indent=2), encoding="utf-8")
