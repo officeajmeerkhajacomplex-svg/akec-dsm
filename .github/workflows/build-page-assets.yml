@@ -7,6 +7,7 @@ on:
       - "scripts/generate_responsive_assets.py"
       - "scripts/purge_page_css.mjs"
       - "scripts/apply_performance_html.py"
+      - "scripts/generate_akec_ui.mjs"
 
 permissions:
   contents: write
@@ -49,8 +50,8 @@ jobs:
       - name: Generate page-specific Bootstrap CSS
         run: node scripts/purge_page_css.mjs
 
-      - name: Fetch the Bootstrap JavaScript bundle for local serving
-        run: node scripts/fetch_bootstrap_js.mjs
+      - name: Generate the lightweight navigation script
+        run: node scripts/generate_akec_ui.mjs
 
       - name: Apply deferred local script and responsive image markup
         run: python scripts/apply_performance_html.py
