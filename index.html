@@ -6,11 +6,20 @@
     <meta name="description" content="Ajmeer Khaja Educational Complex - Leading academic and charitable organization.">
     <link rel="icon" type="image/png" href="/favicon.png">
     <title>Ajmeer Khaja Educational Complex</title>
+    <link rel="preload" as="image" href="assets-optimized/institution-png-640.webp" imagesrcset="assets-optimized/institution-png-320.webp 320w, assets-optimized/institution-png-640.webp 640w, assets-optimized/institution-png-960.webp 960w, assets-optimized/institution-png-1280.webp 1280w" imagesizes="(max-width: 767px) 100vw, 50vw" fetchpriority="high" data-name="akec-hero-image-preload">
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+    <link rel="preload" as="style" href="/assets-optimized/bootstrap-purged.css">
+    <link rel="stylesheet" href="/assets-optimized/bootstrap-purged.css">
+    <link rel="preload" as="style" href="/assets-optimized/remixicon-purged.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets-optimized/remixicon-purged.css"></noscript>
 
     <style>
+.skip-link{position:fixed;left:1rem;top:-6rem;z-index:100000;padding:.75rem 1rem;
+background:#fff;color:#0c629e;border:2px solid #805f16;border-radius:.35rem;
+font-weight:700;text-decoration:underline}
+.skip-link:focus{top:1rem;left:1rem;outline:3px solid #0c629e;outline-offset:3px}
+main#main-content{display:block}
+
         :root {
             --deep-blue: #0c629e;
             --soft-gold: #805f16;
@@ -209,6 +218,7 @@
     </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
     <div class="top-header">
         <div class="container d-flex flex-column flex-md-row justify-content-between">
@@ -225,7 +235,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="assets-optimized/logo-webp-480.webp" alt="AKEC Logo" srcset="assets-optimized/logo-webp-160.webp 160w, assets-optimized/logo-webp-320.webp 320w, assets-optimized/logo-we[...]">
+                <img src="assets-optimized/logo-webp-64.webp" alt="AKEC Logo" srcset="assets-optimized/logo-webp-48.webp 48w, assets-optimized/logo-webp-64.webp 64w, assets-optimized/logo-webp-96.webp 96w, assets-optimized/logo-webp-128.webp 128w, assets-optimized/logo-webp-160.webp 160w, assets-optimized/logo-webp-320.webp 320w, assets-optimized/logo-webp-480.webp 480w" sizes="(max-width: 767px) 40px, 50px">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation" aria-controls="navbarNav" aria-expanded="fal[...]">
                 <span class="ri-menu-line" style="font-size: 24px; color: var(--deep-blue);"></span>
@@ -255,6 +265,8 @@
             </div>
         </div>
     </nav>
+<main id="main-content" tabindex="-1">
+
 
     <section class="custom-banner">
         <div class="container">
@@ -310,6 +322,7 @@
                         <video id="akecScrollVideo" controls playsinline preload="none" poster="assets-optimized/nasim-poster.webp">
                             <source src="assets-optimized/nasim-optimized.mp4" type="video/mp4">
                             <track kind="captions" src="assets-optimized/nasim-captions.vtt" srclang="ml" label="Malayalam">
+                            
                             Your browser does not support the video tag.
                         </video>
                     </div>
@@ -331,7 +344,7 @@
                         <div class="program-content">
                             <h3>Zanchari Excellence Centre For Da'wa</h3>
                             <p>Preparing scholars for effective communication and spiritual leadership.</p>
-                            <a href="dawa.html" style="color:var(--soft-gold); font-weight:700;">View More →</a>
+                            <a href="dawa.html" style="color:var(--soft-gold); font-weight:700;" aria-label="View more about Zanchari Excellence Centre for Da'wa">View More →</a>
                         </div>
                     </div>
                 </div>
@@ -341,7 +354,7 @@
                         <div class="program-content">
                             <h3>Khaja Mueenudheen Hifzul Qur'an Academy</h3>
                             <p>Dedicated to the memorization and preservation of the Holy Qur'an.</p>
-                            <a href="hifz.html" style="color:var(--soft-gold); font-weight:700;">View More →</a>
+                            <a href="hifz.html" style="color:var(--soft-gold); font-weight:700;" aria-label="View more about Khaja Mueenudheen Hifzul Qur'an Academy">View More →</a>
                         </div>
                     </div>
                 </div>
@@ -351,7 +364,7 @@
                         <div class="program-content">
                             <h3>Ajmeer Khaja Residential Madrassa</h3>
                             <p>Comprehensive primary religious education in a nurturing environment.</p>
-                            <a href="madrassa.html" style="color:var(--soft-gold); font-weight:700;">View More →</a>
+                            <a href="madrassa.html" style="color:var(--soft-gold); font-weight:700;" aria-label="View more about Ajmeer Khaja Residential Madrassa">View More →</a>
                         </div>
                     </div>
                 </div>
@@ -361,7 +374,7 @@
                         <div class="program-content">
                             <h3>Mueeniyya Garden Of Qur'an Studies For Girls</h3>
                             <p>Empowering female students through specialized Qur'anic education.</p>
-                            <a href="garden.html" style="color:var(--soft-gold); font-weight:700;">View More →</a>
+                            <a href="garden.html" style="color:var(--soft-gold); font-weight:700;" aria-label="View more about Mueeniyya Garden of Qur'an Studies for Girls">View More →</a>
                         </div>
                     </div>
                 </div>
@@ -391,7 +404,10 @@
         </div>
     </section>
 
-    <footer>
+    
+</main>
+
+<footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">

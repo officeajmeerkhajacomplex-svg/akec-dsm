@@ -7,10 +7,18 @@
     <title>Hifzul Qur'an Academy - AKEC</title>
     
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+    <link rel="preload" as="style" href="/assets-optimized/bootstrap-purged.css">
+    <link rel="stylesheet" href="/assets-optimized/bootstrap-purged.css">
+    <link rel="preload" as="style" href="/assets-optimized/remixicon-purged.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets-optimized/remixicon-purged.css"></noscript>
 
     <style>
+.skip-link{position:fixed;left:1rem;top:-6rem;z-index:100000;padding:.75rem 1rem;
+background:#fff;color:#0c629e;border:2px solid #805f16;border-radius:.35rem;
+font-weight:700;text-decoration:underline}
+.skip-link:focus{top:1rem;left:1rem;outline:3px solid #0c629e;outline-offset:3px}
+main#main-content{display:block}
+
         :root {
             --deep-blue: #0c629e;
             --soft-gold: #805f16;
@@ -126,6 +134,7 @@
     </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
     <div class="top-header">
         <div class="container d-flex justify-content-between">
@@ -142,7 +151,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="assets-optimized/logo-png-480.webp" alt="AKEC Logo" srcset="assets-optimized/logo-png-160.webp 160w, assets-optimized/logo-png-320.webp 320w, assets-optimized/logo-png-480.webp 480w" sizes="180px" decoding="async" width="1200" height="1200">
+                <img src="assets-optimized/logo-png-64.webp" alt="AKEC Logo" srcset="assets-optimized/logo-png-48.webp 48w, assets-optimized/logo-png-64.webp 64w, assets-optimized/logo-png-96.webp 96w, assets-optimized/logo-png-128.webp 128w, assets-optimized/logo-png-160.webp 160w, assets-optimized/logo-png-320.webp 320w, assets-optimized/logo-png-480.webp 480w" sizes="(max-width: 767px) 40px, 50px" decoding="async" width="1200" height="1200">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation" aria-controls="navbarNav" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
@@ -168,6 +177,8 @@
             </div>
         </div>
     </nav>
+<main id="main-content" tabindex="-1">
+
 
     <div class="page-title-area">
         <div class="container">
@@ -234,7 +245,10 @@
         </div>
     </section>
 
-    <footer style="background: #1a1a1a; color: #ccc; padding: 60px 0;">
+    
+</main>
+
+<footer style="background: #1a1a1a; color: #ccc; padding: 60px 0;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">

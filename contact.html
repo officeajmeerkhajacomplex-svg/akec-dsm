@@ -8,10 +8,18 @@
     <meta name="author" content="Ajmeer Khaja Educational Complex">
     
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+    <link rel="preload" as="style" href="/assets-optimized/bootstrap-purged.css">
+    <link rel="stylesheet" href="/assets-optimized/bootstrap-purged.css">
+    <link rel="preload" as="style" href="/assets-optimized/remixicon-purged.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets-optimized/remixicon-purged.css"></noscript>
 
     <style>
+.skip-link{position:fixed;left:1rem;top:-6rem;z-index:100000;padding:.75rem 1rem;
+background:#fff;color:#0c629e;border:2px solid #805f16;border-radius:.35rem;
+font-weight:700;text-decoration:underline}
+.skip-link:focus{top:1rem;left:1rem;outline:3px solid #0c629e;outline-offset:3px}
+main#main-content{display:block}
+
         :root {
             --deep-blue: #0c629e;
             --soft-gold: #805f16;
@@ -124,6 +132,7 @@
     <title>Contact Us - Ajmeer Khaja Educational Complex</title>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
     <header class="header-area">
         <div class="top-header">
@@ -138,7 +147,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
-                    <img src="assets-optimized/logo-webp-480.webp" alt="AKEC Logo" srcset="assets-optimized/logo-webp-160.webp 160w, assets-optimized/logo-webp-320.webp 320w, assets-optimized/logo-webp-480.webp 480w" sizes="180px" decoding="async" width="2480" height="3508">
+                    <img src="assets-optimized/logo-webp-64.webp" alt="AKEC Logo" srcset="assets-optimized/logo-webp-48.webp 48w, assets-optimized/logo-webp-64.webp 64w, assets-optimized/logo-webp-96.webp 96w, assets-optimized/logo-webp-128.webp 128w, assets-optimized/logo-webp-160.webp 160w, assets-optimized/logo-webp-320.webp 320w, assets-optimized/logo-webp-480.webp 480w" sizes="(max-width: 767px) 40px, 50px" decoding="async" width="2480" height="3508">
                 </a>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav m-auto">
@@ -162,6 +171,8 @@
             </div>
         </nav>
     </header>
+<main id="main-content" tabindex="-1">
+
 
     <div class="page-title-area">
         <div class="container">
@@ -220,12 +231,15 @@
         </div>
     </section>
 
-    <footer class="footer-area">
+    
+</main>
+
+<footer class="footer-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="single-footer-widget">
-                        <img src="assets-optimized/logo-webp-480.webp" alt="Logo" style="max-height: 80px; margin-bottom: 20px;" srcset="assets-optimized/logo-webp-160.webp 160w, assets-optimized/logo-webp-320.webp 320w, assets-optimized/logo-webp-480.webp 480w" sizes="180px" decoding="async" width="2480" height="3508">
+                        <img src="assets-optimized/logo-webp-64.webp" alt="Logo" style="max-height: 80px; margin-bottom: 20px;" srcset="assets-optimized/logo-webp-48.webp 48w, assets-optimized/logo-webp-64.webp 64w, assets-optimized/logo-webp-96.webp 96w, assets-optimized/logo-webp-128.webp 128w, assets-optimized/logo-webp-160.webp 160w, assets-optimized/logo-webp-320.webp 320w, assets-optimized/logo-webp-480.webp 480w" sizes="60px" decoding="async" width="2480" height="3508">
                         <p>Ajmeer Khaja Educational Complex is a leading academic and charitable organization committed to holistic social development and spiritual excellence.</p>
                     </div>
                 </div>
