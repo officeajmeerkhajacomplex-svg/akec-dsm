@@ -34,7 +34,9 @@ jobs:
           for attempt in $(seq 1 30); do
             HTML="$(curl --silent --show-error --location --max-time 20 https://akec.vercel.app/ || true)"
             if printf '%s' "$HTML" | grep -qi 'aria-label="Toggle navigation"' &&
-               printf '%s' "$HTML" | grep -qi '#805f16'; then
+               printf '%s' "$HTML" | grep -qi '#805f16' &&
+               printf '%s' "$HTML" | grep -Fqi 'href="/assets-optimized/bootstrap-purged.css"' &&
+               printf '%s' "$HTML" | grep -Fqi '<main id="main-content" tabindex="-1">'; then
               echo "The updated accessibility fixes are live on Vercel."
               exit 0
             fi
