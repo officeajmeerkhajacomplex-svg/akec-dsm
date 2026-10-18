@@ -134,7 +134,7 @@ def update_gallery(text: str) -> str:
         tag = set_attr(
             tag,
             "sizes",
-            "(max-width: 767px) 44vw, (max-width: 1199px) 30vw, (max-width: 1399px) 27vw, 24vw",
+            "(max-width: 767px) 44vw, (max-width: 991px) 34vw, (max-width: 1199px) 31vw, (max-width: 1399px) 24vw, 320px",
         )
         return tag
 
