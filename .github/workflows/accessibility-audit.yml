@@ -33,9 +33,14 @@ jobs:
         run: |
           for attempt in $(seq 1 30); do
             HTML="$(curl --silent --show-error --location --max-time 20 https://akec.vercel.app/ || true)"
+            HAS_CSS=false
+            if printf '%s' "$HTML" | grep -Fqi 'href="/assets-optimized/bootstrap-purged.css"' ||
+               printf '%s' "$HTML" | grep -Fqi 'href="/assets-optimized/bootstrap-purged-index.css"'; then
+              HAS_CSS=true
+            fi
             if printf '%s' "$HTML" | grep -qi 'aria-label="Toggle navigation"' &&
                printf '%s' "$HTML" | grep -qi '#805f16' &&
-               printf '%s' "$HTML" | grep -Fqi 'href="/assets-optimized/bootstrap-purged.css"' &&
+               [ "$HAS_CSS" = true ] &&
                printf '%s' "$HTML" | grep -Fqi '<main id="main-content" tabindex="-1">'; then
               echo "The updated accessibility fixes are live on Vercel."
               exit 0
@@ -63,12 +68,21 @@ jobs:
             esac
             url="https://akec.vercel.app/$route"
             echo "Auditing mobile accessibility: $url"
-            npx --yes lighthouse@12 "$url" \
-              --only-categories=accessibility \
-              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
-              --output=json \
-              --output-path="reports/$page-mobile.report.json" \
-              --quiet
+            for attempt in 1 2; do
+              if npx --yes lighthouse@12 "$url" \
+                --only-categories=accessibility \
+                --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+                --output=json \
+                --output-path="reports/$page-mobile.report.json" \
+                --quiet; then
+                break
+              elif [ "$attempt" -eq 2 ]; then
+                echo "Lighthouse failed after two attempts for $url."
+                exit 1
+              fi
+              echo "Retrying Lighthouse after transient failure for $url."
+              sleep 3
+            done
           done
 
       - name: Run Lighthouse accessibility audit (desktop homepage)
