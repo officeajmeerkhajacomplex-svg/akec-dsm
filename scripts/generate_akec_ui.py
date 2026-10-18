@@ -84,3 +84,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+# Build trigger: use the Python-based generator in CI.
