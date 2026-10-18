@@ -1,0 +1,152 @@
+name: AKEC performance audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: akec-performance-audit
+  cancel-in-progress: false
+
+jobs:
+  lighthouse-performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Wait for the updated homepage and stylesheet to deploy
+        shell: bash
+        run: |
+          for attempt in $(seq 1 24); do
+            HTML="$(curl --silent --show-error --location --max-time 20 https://akec.vercel.app/ || true)"
+            CSS_STATUS="$(curl --silent --output /dev/null --write-out '%{http_code}' --max-time 15 https://akec.vercel.app/assets-optimized/bootstrap-purged-index.css || true)"
+            if [ "$CSS_STATUS" = "200" ] &&
+               printf '%s' "$HTML" | grep -Fqi 'href="/assets-optimized/bootstrap-purged-index.css"' &&
+               printf '%s' "$HTML" | grep -Fqi '<main id="main-content" tabindex="-1">' &&
+               ! printf '%s' "$HTML" | grep -Fq '[...]'; then
+              echo "Homepage and page-specific CSS are live."
+              exit 0
+            fi
+            echo "Waiting for the optimized deployment (attempt $attempt/24; CSS HTTP $CSS_STATUS)."
+            sleep 10
+          done
+          echo "Latest optimized homepage was not detected."
+          exit 1
+
+      - name: Run mobile Lighthouse performance audit
+        shell: bash
+        run: |
+          mkdir -p reports
+          for attempt in 1 2; do
+            if npx --yes lighthouse@12 https://akec.vercel.app/ \
+              --only-categories=performance \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --output=json \
+              --output-path=reports/index-mobile-performance.report.json \
+              --quiet; then
+              break
+            elif [ "$attempt" -eq 2 ]; then
+              echo "Mobile Lighthouse failed after two attempts."
+              exit 1
+            fi
+            echo "Retrying mobile Lighthouse after transient failure."
+            sleep 3
+          done
+
+      - name: Run desktop Lighthouse performance audit
+        shell: bash
+        run: |
+          for attempt in 1 2; do
+            if npx --yes lighthouse@12 https://akec.vercel.app/ \
+              --preset=desktop \
+              --only-categories=performance \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --output=json \
+              --output-path=reports/index-desktop-performance.report.json \
+              --quiet; then
+              break
+            elif [ "$attempt" -eq 2 ]; then
+              echo "Desktop Lighthouse failed after two attempts."
+              exit 1
+            fi
+            echo "Retrying desktop Lighthouse after transient failure."
+            sleep 3
+          done
+
+      - name: Summarize performance scores and remaining audits
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          summaries = []
+          failed_sections = []
+          reports = [
+              ("Mobile", Path("reports/index-mobile-performance.report.json")),
+              ("Desktop", Path("reports/index-desktop-performance.report.json")),
+          ]
+          for device, path in reports:
+              data = json.loads(path.read_text(encoding="utf-8"))
+              audits = data.get("audits", {})
+              category = data.get("categories", {}).get("performance", {})
+              score = category.get("score")
+              summaries.append({
+                  "device": device,
+                  "score": "n/a" if score is None else f"{round(score * 100)}/100",
+                  "fcp": audits.get("first-contentful-paint", {}).get("displayValue", "n/a"),
+                  "lcp": audits.get("largest-contentful-paint", {}).get("displayValue", "n/a"),
+                  "tbt": audits.get("total-blocking-time", {}).get("displayValue", "n/a"),
+                  "cls": audits.get("cumulative-layout-shift", {}).get("displayValue", "n/a"),
+                  "speed": audits.get("speed-index", {}).get("displayValue", "n/a"),
+              })
+              failed_sections.append("### " + device)
+              for ref in category.get("auditRefs", []):
+                  audit = audits.get(ref.get("id", ""), {})
+                  if audit.get("score") is not None and audit.get("score") < 1 and audit.get("scoreDisplayMode") != "notApplicable":
+                      value = audit.get("displayValue") or ""
+                      failed_sections.append(f"- {audit.get('title', ref.get('id'))}: {value}")
+              if failed_sections[-1] == "### " + device:
+                  failed_sections.append("- No scored performance audit failures.")
+              failed_sections.append("")
+
+          lines = [
+              "# AKEC performance audit",
+              "",
+              "| Device | Performance | FCP | LCP | TBT | CLS | Speed Index |",
+              "|---|---:|---:|---:|---:|---:|---:|",
+          ]
+          for row in summaries:
+              lines.append(
+                  f"| {row['device']} | **{row['score']}** | {row['fcp']} | "
+                  f"{row['lcp']} | {row['tbt']} | {row['cls']} | {row['speed']} |"
+              )
+          lines += ["", "## Remaining scored performance audits", ""] + failed_sections
+          Path("performance-summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+          print("\n".join(lines))
+          PY
+          cat performance-summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload mobile and desktop Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: akec-performance-lighthouse-reports
+          path: |
+            reports/*.report.json
+            performance-summary.md
+          if-no-files-found: warn
+          retention-days: 30
