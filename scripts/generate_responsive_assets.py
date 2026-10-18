@@ -55,7 +55,7 @@ def main() -> None:
         raise SystemExit("No original galleryN.webp source images were found.")
 
     for source in gallery_sources:
-        all_results.extend(save_variants(source, f"{source.stem}-webp", GALLERY_WIDTHS, 70))
+        all_results.extend(save_variants(source, f"{source.stem}-webp", GALLERY_WIDTHS, 62))
 
     logo_webp = ROOT / "logo.webp"
     if logo_webp.exists():
@@ -66,7 +66,7 @@ def main() -> None:
 
     hero = ROOT / "institution.png"
     if hero.exists():
-        all_results.extend(save_variants(hero, "institution-png", HERO_WIDTHS, 68))
+        all_results.extend(save_variants(hero, "institution-png", HERO_WIDTHS, 50))
 
     report_path = OUT / "responsive-asset-report.json"
     report_path.write_text(json.dumps({
