@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Apply responsive-image sizing and local deferred Bootstrap across all AKEC pages."""
+"""Apply responsive-image sizing and local deferred Bootstrap across all AKEC pages.
+
+This runs only after every generated image and stylesheet has passed existence checks.
+"""
 from __future__ import annotations
 
 import re
