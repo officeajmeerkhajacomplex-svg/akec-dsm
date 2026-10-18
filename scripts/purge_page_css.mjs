@@ -15,9 +15,8 @@ const safelist = {
     "show", "collapsing", "collapsed", "collapse", "active", "disabled",
     "fade", "focus", "focused", "was-validated", "is-valid", "is-invalid",
     "valid-feedback", "invalid-feedback", "visually-hidden",
-    /^navbar/, /^nav-/, /^dropdown/, /^collapse/, /^modal/, /^toast/,
-    /^tooltip/, /^popover/, /^offcanvas/, /^spinner-/, /^progress-/,
-    /^btn-close/, /^form-/, /^accordion/, /^carousel/, /^table-/,
+    "modal-open", "modal-backdrop", "modal-static", "offcanvas-backdrop",
+    "showing", "hiding", "tooltip", "popover",
   ],
 };
 
