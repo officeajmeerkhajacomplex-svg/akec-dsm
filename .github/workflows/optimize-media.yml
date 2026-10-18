@@ -4,7 +4,6 @@ on:
   push:
     branches: [main]
     paths:
-      - ".github/workflows/optimize-media.yml"
       - "scripts/optimize_media.py"
       - "scripts/purge_css.mjs"
       - "scripts/generate_captions.py"
@@ -89,7 +88,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-      - name: Wait for Vercel to serve the optimized assets
+      - name: Wait for Vercel to serve the optimized HTML and assets
         id: deployment
         shell: bash
         run: |
@@ -99,19 +98,22 @@ jobs:
             echo "ready=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          URL="https://akec.vercel.app/$PROBE"
-          echo "Checking $URL"
+          ASSET_URL="https://akec.vercel.app/$PROBE"
+          echo "Checking optimized asset: $ASSET_URL"
           for attempt in $(seq 1 24); do
-            STATUS="$(curl --silent --output /dev/null --write-out '%{http_code}' --max-time 15 "$URL" || true)"
-            if [ "$STATUS" = "200" ]; then
-              echo "Vercel is serving the optimized asset."
+            ASSET_STATUS="$(curl --silent --output /dev/null --write-out '%{http_code}' --max-time 15 "$ASSET_URL" || true)"
+            HTML="$(curl --silent --show-error --location --max-time 20 https://akec.vercel.app/ || true)"
+            if [ "$ASSET_STATUS" = "200" ] &&
+               printf '%s' "$HTML" | grep -Fqi 'href="/assets-optimized/bootstrap-purged.css"' &&
+               printf '%s' "$HTML" | grep -Fqi '<main id="main-content" tabindex="-1">'; then
+              echo "Vercel is serving the optimized assets and updated main landmark."
               echo "ready=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
-            echo "Deployment not ready yet (HTTP $STATUS); attempt $attempt/24."
+            echo "Latest optimized HTML not ready yet (attempt $attempt/24; asset HTTP $ASSET_STATUS)."
             sleep 10
           done
-          echo "Vercel did not serve the new asset before the audit window ended."
+          echo "Vercel did not serve the latest optimized HTML before the audit window ended."
           echo "ready=false" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node for Lighthouse
