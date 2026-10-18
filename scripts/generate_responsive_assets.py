@@ -10,9 +10,9 @@ ROOT = Path(".")
 OUT = ROOT / "assets-optimized"
 OUT.mkdir(parents=True, exist_ok=True)
 
-GALLERY_WIDTHS = [320, 480, 640, 960, 1280]
+GALLERY_WIDTHS = [320, 360, 400, 480, 640, 960, 1280]
 LOGO_WIDTHS = [48, 64, 96, 128, 160, 320, 480]
-HERO_WIDTHS = [320, 640, 960, 1280]
+HERO_WIDTHS = [320, 480, 640, 800, 960, 1280]
 
 
 def save_variants(source: Path, prefix: str, widths: list[int], quality: int) -> list[dict]:
@@ -55,7 +55,7 @@ def main() -> None:
         raise SystemExit("No original galleryN.webp source images were found.")
 
     for source in gallery_sources:
-        all_results.extend(save_variants(source, f"{source.stem}-webp", GALLERY_WIDTHS, 74))
+        all_results.extend(save_variants(source, f"{source.stem}-webp", GALLERY_WIDTHS, 70))
 
     logo_webp = ROOT / "logo.webp"
     if logo_webp.exists():
@@ -66,7 +66,7 @@ def main() -> None:
 
     hero = ROOT / "institution.png"
     if hero.exists():
-        all_results.extend(save_variants(hero, "institution-png", HERO_WIDTHS, 76))
+        all_results.extend(save_variants(hero, "institution-png", HERO_WIDTHS, 68))
 
     report_path = OUT / "responsive-asset-report.json"
     report_path.write_text(json.dumps({
