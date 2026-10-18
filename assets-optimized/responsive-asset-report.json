@@ -5,385 +5,539 @@
       "path": "assets-optimized/gallery1-webp-320.webp",
       "width": 320,
       "height": 180,
-      "bytes": 10064
+      "bytes": 9678
+    },
+    {
+      "source": "gallery1.webp",
+      "path": "assets-optimized/gallery1-webp-360.webp",
+      "width": 360,
+      "height": 203,
+      "bytes": 11596
+    },
+    {
+      "source": "gallery1.webp",
+      "path": "assets-optimized/gallery1-webp-400.webp",
+      "width": 400,
+      "height": 225,
+      "bytes": 13556
     },
     {
       "source": "gallery1.webp",
       "path": "assets-optimized/gallery1-webp-480.webp",
       "width": 480,
       "height": 270,
-      "bytes": 18892
+      "bytes": 17946
     },
     {
       "source": "gallery1.webp",
       "path": "assets-optimized/gallery1-webp-640.webp",
       "width": 640,
       "height": 360,
-      "bytes": 28930
+      "bytes": 27538
     },
     {
       "source": "gallery1.webp",
       "path": "assets-optimized/gallery1-webp-960.webp",
       "width": 960,
       "height": 540,
-      "bytes": 53442
+      "bytes": 50818
     },
     {
       "source": "gallery1.webp",
       "path": "assets-optimized/gallery1-webp-1280.webp",
       "width": 1280,
       "height": 721,
-      "bytes": 82392
+      "bytes": 78988
     },
     {
       "source": "gallery10.webp",
       "path": "assets-optimized/gallery10-webp-320.webp",
       "width": 320,
       "height": 180,
-      "bytes": 6208
+      "bytes": 5932
+    },
+    {
+      "source": "gallery10.webp",
+      "path": "assets-optimized/gallery10-webp-360.webp",
+      "width": 360,
+      "height": 203,
+      "bytes": 7084
+    },
+    {
+      "source": "gallery10.webp",
+      "path": "assets-optimized/gallery10-webp-400.webp",
+      "width": 400,
+      "height": 225,
+      "bytes": 8294
     },
     {
       "source": "gallery10.webp",
       "path": "assets-optimized/gallery10-webp-480.webp",
       "width": 480,
       "height": 270,
-      "bytes": 11238
+      "bytes": 10612
     },
     {
       "source": "gallery10.webp",
       "path": "assets-optimized/gallery10-webp-640.webp",
       "width": 640,
       "height": 360,
-      "bytes": 17794
+      "bytes": 16780
     },
     {
       "source": "gallery10.webp",
       "path": "assets-optimized/gallery10-webp-960.webp",
       "width": 960,
       "height": 540,
-      "bytes": 32904
+      "bytes": 31280
     },
     {
       "source": "gallery10.webp",
       "path": "assets-optimized/gallery10-webp-1280.webp",
       "width": 1280,
       "height": 721,
-      "bytes": 51322
+      "bytes": 48946
     },
     {
       "source": "gallery11.webp",
       "path": "assets-optimized/gallery11-webp-320.webp",
       "width": 320,
       "height": 180,
-      "bytes": 8424
+      "bytes": 8040
+    },
+    {
+      "source": "gallery11.webp",
+      "path": "assets-optimized/gallery11-webp-360.webp",
+      "width": 360,
+      "height": 203,
+      "bytes": 9712
+    },
+    {
+      "source": "gallery11.webp",
+      "path": "assets-optimized/gallery11-webp-400.webp",
+      "width": 400,
+      "height": 225,
+      "bytes": 11276
     },
     {
       "source": "gallery11.webp",
       "path": "assets-optimized/gallery11-webp-480.webp",
       "width": 480,
       "height": 270,
-      "bytes": 16004
+      "bytes": 15138
     },
     {
       "source": "gallery11.webp",
       "path": "assets-optimized/gallery11-webp-640.webp",
       "width": 640,
       "height": 360,
-      "bytes": 25330
+      "bytes": 24082
     },
     {
       "source": "gallery11.webp",
       "path": "assets-optimized/gallery11-webp-960.webp",
       "width": 960,
       "height": 540,
-      "bytes": 49348
+      "bytes": 46662
     },
     {
       "source": "gallery11.webp",
       "path": "assets-optimized/gallery11-webp-1280.webp",
       "width": 1280,
       "height": 721,
-      "bytes": 79310
+      "bytes": 75584
     },
     {
       "source": "gallery2.webp",
       "path": "assets-optimized/gallery2-webp-320.webp",
       "width": 320,
       "height": 568,
-      "bytes": 20958
+      "bytes": 19898
+    },
+    {
+      "source": "gallery2.webp",
+      "path": "assets-optimized/gallery2-webp-360.webp",
+      "width": 360,
+      "height": 639,
+      "bytes": 23880
+    },
+    {
+      "source": "gallery2.webp",
+      "path": "assets-optimized/gallery2-webp-400.webp",
+      "width": 400,
+      "height": 710,
+      "bytes": 27814
     },
     {
       "source": "gallery2.webp",
       "path": "assets-optimized/gallery2-webp-480.webp",
       "width": 480,
       "height": 853,
-      "bytes": 39110
+      "bytes": 37218
     },
     {
       "source": "gallery2.webp",
       "path": "assets-optimized/gallery2-webp-640.webp",
       "width": 640,
       "height": 1137,
-      "bytes": 60814
+      "bytes": 57072
     },
     {
       "source": "gallery2.webp",
       "path": "assets-optimized/gallery2-webp-960.webp",
       "width": 960,
       "height": 1705,
-      "bytes": 112036
+      "bytes": 106320
     },
     {
       "source": "gallery2.webp",
       "path": "assets-optimized/gallery2-webp-1280.webp",
       "width": 1280,
       "height": 2274,
-      "bytes": 171946
+      "bytes": 163962
     },
     {
       "source": "gallery3.webp",
       "path": "assets-optimized/gallery3-webp-320.webp",
       "width": 320,
       "height": 568,
-      "bytes": 9112
+      "bytes": 8810
+    },
+    {
+      "source": "gallery3.webp",
+      "path": "assets-optimized/gallery3-webp-360.webp",
+      "width": 360,
+      "height": 639,
+      "bytes": 10756
+    },
+    {
+      "source": "gallery3.webp",
+      "path": "assets-optimized/gallery3-webp-400.webp",
+      "width": 400,
+      "height": 710,
+      "bytes": 12568
     },
     {
       "source": "gallery3.webp",
       "path": "assets-optimized/gallery3-webp-480.webp",
       "width": 480,
       "height": 853,
-      "bytes": 17948
+      "bytes": 16924
     },
     {
       "source": "gallery3.webp",
       "path": "assets-optimized/gallery3-webp-640.webp",
       "width": 640,
       "height": 1137,
-      "bytes": 28954
+      "bytes": 27400
     },
     {
       "source": "gallery3.webp",
       "path": "assets-optimized/gallery3-webp-960.webp",
       "width": 960,
       "height": 1705,
-      "bytes": 55786
+      "bytes": 52954
     },
     {
       "source": "gallery3.webp",
       "path": "assets-optimized/gallery3-webp-1280.webp",
       "width": 1280,
       "height": 2274,
-      "bytes": 109784
+      "bytes": 99474
     },
     {
       "source": "gallery4.webp",
       "path": "assets-optimized/gallery4-webp-320.webp",
       "width": 320,
       "height": 568,
-      "bytes": 13104
+      "bytes": 12428
+    },
+    {
+      "source": "gallery4.webp",
+      "path": "assets-optimized/gallery4-webp-360.webp",
+      "width": 360,
+      "height": 639,
+      "bytes": 15468
+    },
+    {
+      "source": "gallery4.webp",
+      "path": "assets-optimized/gallery4-webp-400.webp",
+      "width": 400,
+      "height": 710,
+      "bytes": 17924
     },
     {
       "source": "gallery4.webp",
       "path": "assets-optimized/gallery4-webp-480.webp",
       "width": 480,
       "height": 853,
-      "bytes": 26080
+      "bytes": 24526
     },
     {
       "source": "gallery4.webp",
       "path": "assets-optimized/gallery4-webp-640.webp",
       "width": 640,
       "height": 1137,
-      "bytes": 41046
+      "bytes": 38818
     },
     {
       "source": "gallery4.webp",
       "path": "assets-optimized/gallery4-webp-960.webp",
       "width": 960,
       "height": 1705,
-      "bytes": 85866
+      "bytes": 79134
     },
     {
       "source": "gallery4.webp",
       "path": "assets-optimized/gallery4-webp-1280.webp",
       "width": 1280,
       "height": 2274,
-      "bytes": 159570
+      "bytes": 145290
     },
     {
       "source": "gallery5.webp",
       "path": "assets-optimized/gallery5-webp-320.webp",
       "width": 320,
       "height": 568,
-      "bytes": 12552
+      "bytes": 11770
+    },
+    {
+      "source": "gallery5.webp",
+      "path": "assets-optimized/gallery5-webp-360.webp",
+      "width": 360,
+      "height": 639,
+      "bytes": 14700
+    },
+    {
+      "source": "gallery5.webp",
+      "path": "assets-optimized/gallery5-webp-400.webp",
+      "width": 400,
+      "height": 710,
+      "bytes": 17090
     },
     {
       "source": "gallery5.webp",
       "path": "assets-optimized/gallery5-webp-480.webp",
       "width": 480,
       "height": 853,
-      "bytes": 24352
+      "bytes": 22924
     },
     {
       "source": "gallery5.webp",
       "path": "assets-optimized/gallery5-webp-640.webp",
       "width": 640,
       "height": 1137,
-      "bytes": 38126
+      "bytes": 35646
     },
     {
       "source": "gallery5.webp",
       "path": "assets-optimized/gallery5-webp-960.webp",
       "width": 960,
       "height": 1705,
-      "bytes": 72238
+      "bytes": 67138
     },
     {
       "source": "gallery5.webp",
       "path": "assets-optimized/gallery5-webp-1280.webp",
       "width": 1280,
       "height": 2274,
-      "bytes": 120262
+      "bytes": 111520
     },
     {
       "source": "gallery6.webp",
       "path": "assets-optimized/gallery6-webp-320.webp",
       "width": 320,
       "height": 180,
-      "bytes": 11944
+      "bytes": 11334
+    },
+    {
+      "source": "gallery6.webp",
+      "path": "assets-optimized/gallery6-webp-360.webp",
+      "width": 360,
+      "height": 203,
+      "bytes": 13922
+    },
+    {
+      "source": "gallery6.webp",
+      "path": "assets-optimized/gallery6-webp-400.webp",
+      "width": 400,
+      "height": 225,
+      "bytes": 16432
     },
     {
       "source": "gallery6.webp",
       "path": "assets-optimized/gallery6-webp-480.webp",
       "width": 480,
       "height": 270,
-      "bytes": 22304
+      "bytes": 21464
     },
     {
       "source": "gallery6.webp",
       "path": "assets-optimized/gallery6-webp-640.webp",
       "width": 640,
       "height": 360,
-      "bytes": 35458
+      "bytes": 34080
     },
     {
       "source": "gallery6.webp",
       "path": "assets-optimized/gallery6-webp-960.webp",
       "width": 960,
       "height": 540,
-      "bytes": 65552
+      "bytes": 62708
     },
     {
       "source": "gallery6.webp",
       "path": "assets-optimized/gallery6-webp-1280.webp",
       "width": 1280,
       "height": 721,
-      "bytes": 99434
+      "bytes": 94582
     },
     {
       "source": "gallery7.webp",
       "path": "assets-optimized/gallery7-webp-320.webp",
       "width": 320,
       "height": 180,
-      "bytes": 11010
+      "bytes": 10468
+    },
+    {
+      "source": "gallery7.webp",
+      "path": "assets-optimized/gallery7-webp-360.webp",
+      "width": 360,
+      "height": 203,
+      "bytes": 13030
+    },
+    {
+      "source": "gallery7.webp",
+      "path": "assets-optimized/gallery7-webp-400.webp",
+      "width": 400,
+      "height": 225,
+      "bytes": 15750
     },
     {
       "source": "gallery7.webp",
       "path": "assets-optimized/gallery7-webp-480.webp",
       "width": 480,
       "height": 270,
-      "bytes": 22806
+      "bytes": 21858
     },
     {
       "source": "gallery7.webp",
       "path": "assets-optimized/gallery7-webp-640.webp",
       "width": 640,
       "height": 360,
-      "bytes": 38654
+      "bytes": 37032
     },
     {
       "source": "gallery7.webp",
       "path": "assets-optimized/gallery7-webp-960.webp",
       "width": 960,
       "height": 540,
-      "bytes": 81398
+      "bytes": 77578
     },
     {
       "source": "gallery7.webp",
       "path": "assets-optimized/gallery7-webp-1280.webp",
       "width": 1280,
       "height": 721,
-      "bytes": 139550
+      "bytes": 131848
     },
     {
       "source": "gallery8.webp",
       "path": "assets-optimized/gallery8-webp-320.webp",
       "width": 320,
       "height": 568,
-      "bytes": 14936
+      "bytes": 14156
+    },
+    {
+      "source": "gallery8.webp",
+      "path": "assets-optimized/gallery8-webp-360.webp",
+      "width": 360,
+      "height": 639,
+      "bytes": 17130
+    },
+    {
+      "source": "gallery8.webp",
+      "path": "assets-optimized/gallery8-webp-400.webp",
+      "width": 400,
+      "height": 710,
+      "bytes": 20286
     },
     {
       "source": "gallery8.webp",
       "path": "assets-optimized/gallery8-webp-480.webp",
       "width": 480,
       "height": 853,
-      "bytes": 27586
+      "bytes": 26270
     },
     {
       "source": "gallery8.webp",
       "path": "assets-optimized/gallery8-webp-640.webp",
       "width": 640,
       "height": 1137,
-      "bytes": 43980
+      "bytes": 41062
     },
     {
       "source": "gallery8.webp",
       "path": "assets-optimized/gallery8-webp-960.webp",
       "width": 960,
       "height": 1705,
-      "bytes": 80040
+      "bytes": 76480
     },
     {
       "source": "gallery8.webp",
       "path": "assets-optimized/gallery8-webp-1280.webp",
       "width": 1280,
       "height": 2274,
-      "bytes": 125380
+      "bytes": 118948
     },
     {
       "source": "gallery9.webp",
       "path": "assets-optimized/gallery9-webp-320.webp",
       "width": 320,
       "height": 180,
-      "bytes": 7400
+      "bytes": 7014
+    },
+    {
+      "source": "gallery9.webp",
+      "path": "assets-optimized/gallery9-webp-360.webp",
+      "width": 360,
+      "height": 203,
+      "bytes": 8378
+    },
+    {
+      "source": "gallery9.webp",
+      "path": "assets-optimized/gallery9-webp-400.webp",
+      "width": 400,
+      "height": 225,
+      "bytes": 9996
     },
     {
       "source": "gallery9.webp",
       "path": "assets-optimized/gallery9-webp-480.webp",
       "width": 480,
       "height": 270,
-      "bytes": 13806
+      "bytes": 13160
     },
     {
       "source": "gallery9.webp",
       "path": "assets-optimized/gallery9-webp-640.webp",
       "width": 640,
       "height": 360,
-      "bytes": 21876
+      "bytes": 20774
     },
     {
       "source": "gallery9.webp",
       "path": "assets-optimized/gallery9-webp-960.webp",
       "width": 960,
       "height": 540,
-      "bytes": 40488
+      "bytes": 38938
     },
     {
       "source": "gallery9.webp",
       "path": "assets-optimized/gallery9-webp-1280.webp",
       "width": 1280,
       "height": 721,
-      "bytes": 63732
+      "bytes": 59840
     },
     {
       "source": "logo.webp",
@@ -488,30 +642,44 @@
       "path": "assets-optimized/institution-png-320.webp",
       "width": 320,
       "height": 149,
-      "bytes": 12998
+      "bytes": 11992
+    },
+    {
+      "source": "institution.png",
+      "path": "assets-optimized/institution-png-480.webp",
+      "width": 480,
+      "height": 224,
+      "bytes": 22948
     },
     {
       "source": "institution.png",
       "path": "assets-optimized/institution-png-640.webp",
       "width": 640,
       "height": 299,
-      "bytes": 41150
+      "bytes": 38076
+    },
+    {
+      "source": "institution.png",
+      "path": "assets-optimized/institution-png-800.webp",
+      "width": 800,
+      "height": 374,
+      "bytes": 55678
     },
     {
       "source": "institution.png",
       "path": "assets-optimized/institution-png-960.webp",
       "width": 960,
       "height": 448,
-      "bytes": 82458
+      "bytes": 76140
     },
     {
       "source": "institution.png",
       "path": "assets-optimized/institution-png-1280.webp",
       "width": 1280,
       "height": 598,
-      "bytes": 137682
+      "bytes": 128284
     }
   ],
-  "variant_count": 73,
-  "bytes": 3179528
+  "variant_count": 97,
+  "bytes": 3403264
 }
