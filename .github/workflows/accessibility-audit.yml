@@ -65,7 +65,7 @@ jobs:
               --only-categories=accessibility \
               --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
               --output=json \
-              --output-path="reports/$page-mobile" \
+              --output-path="reports/$page-mobile.report.json" \
               --quiet
           done
 
@@ -76,7 +76,7 @@ jobs:
             --only-categories=accessibility \
             --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
             --output=json \
-            --output-path=reports/index-desktop \
+            --output-path=reports/index-desktop.report.json \
             --quiet
 
       - name: Summarize accessibility scores and failed audits
@@ -97,6 +97,8 @@ jobs:
           ]
           overall_failures = []
           files = sorted(glob.glob("reports/**/*.json", recursive=True))
+          if not files:
+              raise SystemExit("No Lighthouse JSON reports were found; refusing to publish an empty summary.")
           for filename in files:
               data = json.loads(Path(filename).read_text(encoding="utf-8"))
               category = data.get("categories", {}).get("accessibility", {})
@@ -121,6 +123,8 @@ jobs:
                       overall_failures.append(f"- {selector} — {snippet[:240]}")
                   overall_failures.append("")
           summary += ["", "## Remaining scored issues", ""]
+          if len(files) < 9:
+              overall_failures.append(f"WARNING: Expected 9 JSON reports but collected only {len(files)}.")
           summary += overall_failures or ["No scored accessibility failures were reported in these runs."]
           Path("accessibility-summary.md").write_text("\n".join(summary), encoding="utf-8")
           print("\n".join(summary))
