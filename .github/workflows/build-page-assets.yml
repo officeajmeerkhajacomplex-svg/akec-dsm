@@ -48,6 +48,9 @@ jobs:
       - name: Generate page-specific Bootstrap CSS
         run: node scripts/purge_page_css.mjs
 
+      - name: Fetch the Bootstrap JavaScript bundle for local serving
+        run: node scripts/fetch_bootstrap_js.mjs
+
       - name: Commit only generated assets
         run: |
           git config user.name "github-actions[bot]"
