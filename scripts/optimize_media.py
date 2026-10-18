@@ -66,7 +66,7 @@ def optimize_images() -> tuple[dict[str, dict], list[dict]]:
                 image = image.convert("RGBA" if has_alpha else "RGB")
                 prefix = f"{clean_name(source.stem)}-{clean_name(source.suffix.lstrip('.'))}"
                 created = []
-                quality = 82 if is_logo(source) else 76
+                quality = 86 if ("admission" in source.stem.lower() or is_logo(source)) else 78
                 for target_width in widths_for(source, original_width):
                     target_height = max(1, round(original_height * target_width / original_width))
                     resized = image.copy()
