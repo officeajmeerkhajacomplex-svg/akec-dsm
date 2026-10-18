@@ -7,7 +7,7 @@ on:
       - "scripts/generate_responsive_assets.py"
       - "scripts/purge_page_css.mjs"
       - "scripts/apply_performance_html.py"
-      - "scripts/generate_akec_ui.mjs"
+      - "scripts/generate_akec_ui.py"
 
 permissions:
   contents: write
@@ -51,7 +51,7 @@ jobs:
         run: node scripts/purge_page_css.mjs
 
       - name: Generate the lightweight navigation script
-        run: node scripts/generate_akec_ui.mjs
+        run: python scripts/generate_akec_ui.py
 
       - name: Apply deferred local script and responsive image markup
         run: python scripts/apply_performance_html.py
