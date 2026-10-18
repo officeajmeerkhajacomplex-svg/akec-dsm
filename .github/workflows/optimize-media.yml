@@ -1,0 +1,177 @@
+name: Optimize AKEC media and audit performance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/optimize-media.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: optimize-akec-media
+  cancel-in-progress: false
+
+jobs:
+  optimize-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out production branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install image optimization tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install Pillow
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+
+      - name: Generate responsive images and compressed video
+        run: python scripts/optimize_media.py
+
+      - name: Commit optimized assets and HTML references
+        id: commit-assets
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- assets-optimized
+          git add -- '*.html'
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No new asset changes to commit."
+          else
+            git commit -m "Optimize images and video for faster loading"
+            git push origin HEAD:main
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload the optimization report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: akec-media-optimization-report
+          path: optimization-report.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Wait for Vercel to serve the optimized assets
+        id: deployment
+        shell: bash
+        run: |
+          PROBE="$(python -c 'import json; print(json.load(open("optimization-report.json")).get("probe_path") or "")')"
+          if [ -z "$PROBE" ]; then
+            echo "No suitable optimized image was generated for the deployment check."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          URL="https://akec.vercel.app/$PROBE"
+          echo "Checking $URL"
+          for attempt in $(seq 1 24); do
+            STATUS="$(curl --silent --output /dev/null --write-out '%{http_code}' --max-time 15 "$URL" || true)"
+            if [ "$STATUS" = "200" ]; then
+              echo "Vercel is serving the optimized asset."
+              echo "ready=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Deployment not ready yet (HTTP $STATUS); attempt $attempt/24."
+            sleep 10
+          done
+          echo "Vercel did not serve the new asset before the audit window ended."
+          echo "ready=false" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Node for Lighthouse
+        if: steps.deployment.outputs.ready == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run mobile Lighthouse audit
+        if: steps.deployment.outputs.ready == 'true'
+        run: |
+          npx --yes lighthouse https://akec.vercel.app/ \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+            --output=html --output=json \
+            --output-path=./lighthouse-mobile.report \
+            --quiet
+
+      - name: Run desktop Lighthouse audit
+        if: steps.deployment.outputs.ready == 'true'
+        run: |
+          npx --yes lighthouse https://akec.vercel.app/ \
+            --preset=desktop \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+            --output=html --output=json \
+            --output-path=./lighthouse-desktop.report \
+            --quiet
+
+      - name: Add performance metrics to the workflow summary
+        if: steps.deployment.outputs.ready == 'true'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          def fmt_ms(value):
+              if value is None:
+                  return "n/a"
+              return f"{value / 1000:.2f} s"
+
+          summary = ["## AKEC homepage Lighthouse performance audit", ""]
+          for label, path in [
+              ("Mobile", Path("lighthouse-mobile.report.report.json")),
+              ("Desktop", Path("lighthouse-desktop.report.report.json")),
+          ]:
+              if not path.exists():
+                  summary.append(f"### {label}")
+                  summary.append("Report JSON was not produced.")
+                  summary.append("")
+                  continue
+              data = json.loads(path.read_text(encoding="utf-8"))
+              audits = data.get("audits", {})
+              score = data.get("categories", {}).get("performance", {}).get("score")
+              score_text = f"{round(score * 100)}/100" if score is not None else "n/a"
+              lcp = audits.get("largest-contentful-paint", {}).get("numericValue")
+              fcp = audits.get("first-contentful-paint", {}).get("numericValue")
+              cls = audits.get("cumulative-layout-shift", {}).get("displayValue")
+              tbt = audits.get("total-blocking-time", {}).get("numericValue")
+              summary += [
+                  f"### {label}",
+                  f"- Performance score: **{score_text}**",
+                  f"- First Contentful Paint: {fmt_ms(fcp)}",
+                  f"- Largest Contentful Paint: {fmt_ms(lcp)}",
+                  f"- Total Blocking Time: {fmt_ms(tbt)}",
+                  f"- Cumulative Layout Shift: {cls or 'n/a'}",
+                  "",
+              ]
+          Path("lighthouse-summary.md").write_text("\n".join(summary), encoding="utf-8")
+          print("\n".join(summary))
+          PY
+          cat lighthouse-summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload mobile and desktop Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: akec-lighthouse-reports
+          path: |
+            lighthouse-mobile.report.report.html
+            lighthouse-mobile.report.report.json
+            lighthouse-desktop.report.report.html
+            lighthouse-desktop.report.report.json
+            lighthouse-summary.md
+          if-no-files-found: warn
+          retention-days: 30
