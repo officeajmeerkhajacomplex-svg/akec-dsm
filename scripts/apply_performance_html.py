@@ -63,13 +63,13 @@ def ensure_dropdown_css(text: str) -> str:
     rule = ".navbar-nav .dropdown-menu.show{display:block;opacity:1;visibility:visible;transform:translateY(0)}"
     if rule in text or ".navbar-nav .dropdown-menu.show" in text:
         return text
-    if re.search(r"</style\\s*>", text, re.I):
-        return re.sub(r"</style\\s*>", rule + "\\n</style>", text, count=1, flags=re.I)
-    # A page without inline CSS can safely get this small local behavior rule in its head.
-    head_end = re.search(r"</head\\s*>", text, re.I)
+    if re.search(r"</style\s*>", text, re.I):
+        return re.sub(r"</style\s*>", rule + "\n</style>", text, count=1, flags=re.I)
+    # Some contact-page revisions have no inline style block; add a small style block safely.
+    head_end = re.search(r"</head\s*>", text, re.I)
     if not head_end:
         raise RuntimeError("Could not add the dropdown visibility rule: no head element.")
-    style_tag = "<style>" + rule + "</style>\\n"
+    style_tag = "<style>" + rule + "</style>\n"
     return text[:head_end.start()] + style_tag + text[head_end.start():]
 
 
