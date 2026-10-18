@@ -13,7 +13,7 @@ PAGES = [
     "index.html", "about.html", "admission.html", "contact.html",
     "dawa.html", "garden.html", "hifz.html", "madrassa.html",
 ]
-BOOTSTRAP_JS = "/assets-optimized/bootstrap.bundle.min.js"
+UI_SCRIPT = "/assets-optimized/akec-ui.js"
 HERO_WIDTHS = [320, 480, 640, 800, 960, 1280]
 GALLERY_WIDTHS = [320, 360, 400, 480, 640, 960, 1280]
 
@@ -42,17 +42,30 @@ def replace_bootstrap_script(text: str, page: str) -> str:
         r"""<script\b(?=[^>]*\bsrc\s*=\s*["']https://cdn\.jsdelivr\.net/npm/bootstrap@5\.3\.0/dist/js/bootstrap\.bundle\.min\.js["'])[^>]*>\s*</script>""",
         re.I | re.S,
     )
-    text = cdn_script.sub("", text)
-    occurrences = len(re.findall(r'<script\b[^>]*src="/assets-optimized/bootstrap\.bundle\.min\.js"', text, re.I))
+    old_local_script = re.compile(
+        r"""<script\b(?=[^>]*\bsrc\s*=\s*["']/assets-optimized/bootstrap\.bundle\.min\.js["'])[^>]*>\s*</script>""",
+        re.I | re.S,
+    )
+    text = old_local_script.sub("", cdn_script.sub("", text))
+    occurrences = len(re.findall(r'<script\b[^>]*src="/assets-optimized/akec-ui\.js"', text, re.I))
     if occurrences == 0:
-        tag = f'    <script defer src="{BOOTSTRAP_JS}"></script>\n'
+        tag = f'    <script defer src="{UI_SCRIPT}"></script>\n'
         head_end = re.search(r"</head\s*>", text, re.I)
         if not head_end:
             raise RuntimeError(page + ": </head> not found.")
         text = text[:head_end.start()] + tag + text[head_end.start():]
     elif occurrences > 1:
-        raise RuntimeError(page + ": duplicate local Bootstrap scripts found.")
+        raise RuntimeError(page + ": duplicate local AKEC UI scripts found.")
     return text
+
+
+def ensure_dropdown_css(text: str) -> str:
+    rule = ".navbar-nav .dropdown-menu.show{display:block;opacity:1;visibility:visible;transform:translateY(0)}"
+    if rule in text or ".navbar-nav .dropdown-menu.show" in text:
+        return text
+    if not re.search(r"</style\\s*>", text, re.I):
+        raise RuntimeError("Could not add the dropdown visibility rule: no inline style block.")
+    return re.sub(r"</style\\s*>", rule + "\\n</style>", text, count=1, flags=re.I)
 
 
 def update_hero(text: str) -> str:
@@ -130,8 +143,8 @@ def update_gallery(text: str) -> str:
 
 def main() -> None:
     # Never point production HTML at an asset that has not already been built.
-    if not (ROOT / BOOTSTRAP_JS.lstrip("/")).is_file():
-        raise SystemExit("Self-hosted Bootstrap bundle is missing; refusing to update HTML.")
+    if not (ROOT / UI_SCRIPT.lstrip("/")).is_file():
+        raise SystemExit("Lightweight AKEC UI script is missing; refusing to update HTML.")
     for width in HERO_WIDTHS:
         if not (ROOT / f"assets-optimized/institution-png-{width}.webp").is_file():
             raise SystemExit(f"Missing responsive hero image width {width}.")
@@ -149,13 +162,14 @@ def main() -> None:
         if "[...]" in before:
             raise SystemExit(page + ": truncated markup marker found.")
         text = replace_bootstrap_script(before, page)
+        text = ensure_dropdown_css(text)
         if page == "index.html":
             text = update_hero(text)
             text = update_gallery(text)
         if "[...]" in text:
             raise SystemExit(page + ": generated text unexpectedly contains a truncation marker.")
-        if len(re.findall(r'<script\b[^>]*src="/assets-optimized/bootstrap\.bundle\.min\.js"', text, re.I)) != 1:
-            raise SystemExit(page + ": local Bootstrap reference validation failed.")
+        if len(re.findall(r'<script\b[^>]*src="/assets-optimized/akec-ui\.js"', text, re.I)) != 1:
+            raise SystemExit(page + ": local navigation script reference validation failed.")
         if page == "index.html":
             if not re.search(r"<title\b[^>]*>[\s\S]*?</title>", text, re.I):
                 raise SystemExit("Homepage title is malformed.")
